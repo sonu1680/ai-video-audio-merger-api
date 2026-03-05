@@ -1,0 +1,393 @@
+[22:12:21] INFO     📋 Full debug log → automation_20260305_221221.log
+[22:12:21] INFO     =======================================================
+[22:12:21] INFO     🚀 Grok Video Generation Automation
+[22:12:21] INFO        Job Start: 2026-03-05T22:12:21.711056
+[22:12:21] INFO        Prompt   : {"shots": [{"shot_number": 1, "duration": "4s", "description": "Wide establishing shot of Mumbai Chowpatty beach at sunset with waves gently hitting the shore and people walking along the sand.", "camera_movement_lighting": "Slow cinematic pan across the beach with warm golden sunset lighting reflecting on the water.", "audio_cue": "Ocean waves and distant seagulls with light evening ambience.", "voiceover_narration": "बहुत साल पहले मुंबई के चौपाटी समुद्र किनारे एक छोटा सा ठेला लगता था।", "voice_style": "warm storytelling tone"}, {"shot_number": 2, "duration": "3s", "description": "Medium shot of a humble street vendor Ramu standing beside his wooden cart filled with puffed rice.", "camera_movement_lighting": "Slow push-in camera movement with soft sunset light illuminating the cart.", "audio_cue": "Soft beach ambience with distant chatter of people.", "voiceover_narration": "उस ठेले को चलाता था रामू।", "voice_style": "gentle narrative tone"}, {"shot_number": 3, "duration": "3s", "description": "Close-up of the puffed rice container on the cart while beach visitors walk past in the background.", "camera_movement_lighting": "Static close-up shot with warm natural lighting and slight breeze movement.", "audio_cue": "Waves continuing softly with light wind.", "voiceover_narration": "लोग समुद्र की ठंडी हवा खाने आते थे, लेकिन उसके ठेले पर बस साधारण सा मुरमुरा ही मिलता था।", "voice_style": "calm storytelling tone"}]}
+[22:12:21] INFO        Image    : /home/sonupandit/Documents/ai-vide-api/twitter-automation/default.png
+[22:12:21] INFO        Output   : /home/sonupandit/Documents/ai-vide-api/twitter-automation/output.mp4
+[22:12:21] INFO     =======================================================
+[22:12:22] INFO     STAGE 1: Launching Chrome
+[22:12:22] INFO     ✅ STAGE 1 PASSED: Chrome launched.
+[22:12:22] INFO     STAGE 2: Navigating to Grok
+[22:12:23] INFO     ⏳ Waiting 7.4s for UI to settle …
+[22:12:31] DEBUG    🖱️  Scroll up 139px
+[22:12:31] DEBUG    🖱️  Mouse jiggle → (1040, 210)
+[22:12:32] INFO     ✅ STAGE 2 PASSED: Page loaded.
+[22:12:32] DEBUG    🕐 Human delay 2.8s post-navigation
+[22:12:34] INFO     STAGE 3: Ensuring Video mode is selected
+[22:12:34] DEBUG    🕐 Human delay 1.0s before checking mode
+[22:12:36] INFO        Current mode button text: 'Video'
+[22:12:36] INFO     ✅ STAGE 3 PASSED: Already in Video mode.
+[22:12:36] INFO     STAGE 4: Uploading image
+[22:12:36] INFO     🖼️  Image: /home/sonupandit/Documents/ai-vide-api/twitter-automation/default.png (7.52 MB)
+[22:12:36] INFO     📤 File set on input.
+[22:12:36] DEBUG    🕐 Human delay 2.5s after file select
+[22:12:38] DEBUG    ✅ 'upload visible' met on attempt 1/20
+[22:12:38] INFO     ✅ STAGE 4 PASSED: Image visible in UI.
+[22:12:38] INFO     ⏳ Waiting 60s for Grok to process image …
+[22:12:48] INFO        … 50s remaining
+[22:12:58] INFO        … 40s remaining
+[22:13:08] INFO        … 30s remaining
+[22:13:18] INFO        … 20s remaining
+[22:13:28] INFO        … 10s remaining
+[22:13:38] INFO     STAGE 5: Entering prompt
+[22:13:38] INFO     📝 «{"shots": [{"shot_number": 1, "duration": "4s", "description": "Wide establishing shot of Mumbai Chowpatty beach at sunset with waves gently hitting the shore and people walking along the sand.", "camera_movement_lighting": "Slow cinematic pan across the beach with warm golden sunset lighting reflecting on the water.", "audio_cue": "Ocean waves and distant seagulls with light evening ambience.", "voiceover_narration": "बहुत साल पहले मुंबई के चौपाटी समुद्र किनारे एक छोटा सा ठेला लगता था।", "voice_style": "warm storytelling tone"}, {"shot_number": 2, "duration": "3s", "description": "Medium shot of a humble street vendor Ramu standing beside his wooden cart filled with puffed rice.", "camera_movement_lighting": "Slow push-in camera movement with soft sunset light illuminating the cart.", "audio_cue": "Soft beach ambience with distant chatter of people.", "voiceover_narration": "उस ठेले को चलाता था रामू।", "voice_style": "gentle narrative tone"}, {"shot_number": 3, "duration": "3s", "description": "Close-up of the puffed rice container on the cart while beach visitors walk past in the background.", "camera_movement_lighting": "Static close-up shot with warm natural lighting and slight breeze movement.", "audio_cue": "Waves continuing softly with light wind.", "voiceover_narration": "लोग समुद्र की ठंडी हवा खाने आते थे, लेकिन उसके ठेले पर बस साधारण सा मुरमुरा ही मिलता था।", "voice_style": "calm storytelling tone"}]}»
+[22:13:38] DEBUG    🖱️  Scroll up 116px
+[22:13:39] DEBUG    🕐 Human delay 2.6s before typing prompt
+[22:13:41] DEBUG    🖱️  Mouse jiggle → (681, 234)
+[22:13:47] DEBUG    Strategy 'textarea' failed: Locator.wait_for: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("textarea").first
+
+[22:13:48] INFO     ✏️  Entered via ProseMirror.
+[22:13:49] DEBUG    ✅ 'prompt in DOM' met on attempt 1/8
+[22:13:49] INFO     ✅ STAGE 5 PASSED: Prompt confirmed in DOM.
+[22:13:49] INFO     STAGE 6: Submitting generation request
+[22:13:49] DEBUG    🕐 Human delay 0.7s before pressing Enter
+[22:13:56] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_after_submit.png
+[22:13:56] INFO     ✅ STAGE 6 PASSED: Generation request submitted.
+[22:13:56] INFO     ⏳ Waiting for generation to complete (looking for 'Make video' or video element) …
+[22:13:56] INFO        ⏳ Still generating … 0s
+[22:13:59] INFO     ✅ 'Make video' button found after 3s — images generated.
+[22:13:59] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_images_done.png
+[22:13:59] INFO     STAGE 7: Clicking 'Make video' button
+[22:13:59] DEBUG    🕐 Human delay 2.2s before clicking Make video
+[22:14:01] DEBUG    🖱️  Mouse jiggle → (459, 470)
+[22:14:02] INFO     🎬 Clicked 'Make video'!
+[22:14:06] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/07_make_video_clicked.png
+[22:14:06] INFO     ⏳ Waiting for video generation (up to 600s) …
+[22:14:06] INFO        ⏳ Video generating … 0s
+[22:14:21] INFO        ⏳ Video generating … 15s
+[22:14:36] INFO        ⏳ Video generating … 30s
+[22:14:51] INFO        ⏳ Video generating … 45s
+[22:15:06] INFO        ⏳ Video generating … 60s
+[22:15:21] INFO        ⏳ Video generating … 75s
+[22:15:27] INFO     ✅ Video element found after 81s!
+[22:15:27] INFO        Video src: https://assets.grok.com/users/8dbf2400-2043-4217-8f1b-f55601499675/generated/bab44ac0-b142-43ba-a9eb…
+[22:15:27] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/07_video_generated.png
+[22:15:27] INFO     STAGE 8: Downloading generated video
+[22:15:27] INFO        Trying Strategy 1: Extract video src URL …
+[22:15:27] INFO     🔗 Video URL found: https://assets.grok.com/users/8dbf2400-2043-4217-8f1b-f55601499675/generated/bab44ac0-b142-43ba-a9eb-a44c0beb5670/genera…
+[22:15:27] INFO     ⬇️  Downloading video to /home/sonupandit/Documents/ai-vide-api/twitter-automation/output.mp4 …
+[22:15:28] WARNING  ⚠️  Direct download failed: HTTP Error 403: Forbidden — trying Strategy 2.
+[22:15:28] INFO        Trying Strategy 2: Click download button …
+[22:15:28] INFO        Found download element: button[aria-label*="ownload"]
+[22:15:28] INFO     ⬇️  Attempt 1/3 …
+[22:15:33] INFO     ✅ STAGE 8 PASSED (Strategy 2): /home/sonupandit/Documents/ai-vide-api/twitter-automation/output.mp4 (3.20 MB)
+[22:15:33] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/08_download_success.png
+[22:15:34] INFO     
+=======================================================
+[22:15:34] INFO     📊 FINAL STAGE SUMMARY
+[22:15:34] INFO     =======================================================
+[22:15:34] INFO       ✅ LAUNCH          PASSED
+[22:15:34] INFO       ✅ NAVIGATE        PASSED
+[22:15:34] INFO       ✅ VIDEO_MODE      PASSED
+[22:15:34] INFO       ✅ UPLOAD          PASSED
+[22:15:34] INFO       ✅ PROMPT          PASSED
+[22:15:34] INFO       ✅ SUBMIT          PASSED
+[22:15:34] INFO       ✅ MAKE_VIDEO      PASSED
+[22:15:34] INFO       ✅ DOWNLOAD        PASSED
+[22:15:34] INFO        Job End  : 2026-03-05T22:15:34.066025
+[22:15:34] INFO     =======================================================
+[22:15:34] INFO     🎉 SUCCESS!
+[22:15:34] INFO     =======================================================
+[22:15:34] INFO     🚀 Grok Video Generation Automation
+[22:15:34] INFO        Job Start: 2026-03-05T22:15:34.067089
+[22:15:34] INFO        Prompt   : {"shots": [{"shot_number": 1, "duration": "4s", "description": "Wide establishing shot of Mumbai Chowpatty beach at sunset with waves gently hitting the shore and people walking along the sand.", "camera_movement_lighting": "Slow cinematic pan across the beach with warm golden sunset lighting reflecting on the water.", "audio_cue": "Ocean waves and distant seagulls with light evening ambience.", "voiceover_narration": "बहुत साल पहले मुंबई के चौपाटी समुद्र किनारे एक छोटा सा ठेला लगता था।", "voice_style": "warm storytelling tone"}, {"shot_number": 2, "duration": "3s", "description": "Medium shot of a humble street vendor Ramu standing beside his wooden cart filled with puffed rice.", "camera_movement_lighting": "Slow push-in camera movement with soft sunset light illuminating the cart.", "audio_cue": "Soft beach ambience with distant chatter of people.", "voiceover_narration": "उस ठेले को चलाता था रामू।", "voice_style": "gentle narrative tone"}, {"shot_number": 3, "duration": "3s", "description": "Close-up of the puffed rice container on the cart while beach visitors walk past in the background.", "camera_movement_lighting": "Static close-up shot with warm natural lighting and slight breeze movement.", "audio_cue": "Waves continuing softly with light wind.", "voiceover_narration": "लोग समुद्र की ठंडी हवा खाने आते थे, लेकिन उसके ठेले पर बस साधारण सा मुरमुरा ही मिलता था।", "voice_style": "calm storytelling tone"}]}
+[22:15:34] INFO        Image    : /home/sonupandit/Documents/ai-vide-api/twitter-automation/default.png
+[22:15:34] INFO        Output   : /home/sonupandit/Documents/ai-vide-api/twitter-automation/output.mp4
+[22:15:34] INFO     =======================================================
+[22:15:34] INFO     STAGE 1: Launching Chrome
+[22:15:34] INFO     ✅ STAGE 1 PASSED: Chrome launched.
+[22:15:34] INFO     STAGE 2: Navigating to Grok
+[22:15:35] INFO     ⏳ Waiting 8.8s for UI to settle …
+[22:15:44] DEBUG    🖱️  Scroll up 138px
+[22:15:45] DEBUG    🖱️  Mouse jiggle → (821, 562)
+[22:15:46] INFO     ✅ STAGE 2 PASSED: Page loaded.
+[22:15:46] DEBUG    🕐 Human delay 2.8s post-navigation
+[22:15:48] INFO     STAGE 3: Ensuring Video mode is selected
+[22:15:48] DEBUG    🕐 Human delay 0.6s before checking mode
+[22:15:49] INFO        Current mode button text: 'Video'
+[22:15:49] INFO     ✅ STAGE 3 PASSED: Already in Video mode.
+[22:15:49] INFO     STAGE 4: Uploading image
+[22:15:49] INFO     🖼️  Image: /home/sonupandit/Documents/ai-vide-api/twitter-automation/default.png (7.52 MB)
+[22:15:49] INFO     📤 File set on input.
+[22:15:49] DEBUG    🕐 Human delay 3.0s after file select
+[22:15:52] DEBUG    ✅ 'upload visible' met on attempt 1/20
+[22:15:52] INFO     ✅ STAGE 4 PASSED: Image visible in UI.
+[22:15:52] INFO     ⏳ Waiting 60s for Grok to process image …
+[22:16:02] INFO        … 50s remaining
+[22:16:12] INFO        … 40s remaining
+[22:16:22] INFO        … 30s remaining
+[22:16:32] INFO        … 20s remaining
+[22:16:42] INFO        … 10s remaining
+[22:16:52] INFO     STAGE 5: Entering prompt
+[22:16:52] INFO     📝 «{"shots": [{"shot_number": 1, "duration": "4s", "description": "Wide establishing shot of Mumbai Chowpatty beach at sunset with waves gently hitting the shore and people walking along the sand.", "camera_movement_lighting": "Slow cinematic pan across the beach with warm golden sunset lighting reflecting on the water.", "audio_cue": "Ocean waves and distant seagulls with light evening ambience.", "voiceover_narration": "बहुत साल पहले मुंबई के चौपाटी समुद्र किनारे एक छोटा सा ठेला लगता था।", "voice_style": "warm storytelling tone"}, {"shot_number": 2, "duration": "3s", "description": "Medium shot of a humble street vendor Ramu standing beside his wooden cart filled with puffed rice.", "camera_movement_lighting": "Slow push-in camera movement with soft sunset light illuminating the cart.", "audio_cue": "Soft beach ambience with distant chatter of people.", "voiceover_narration": "उस ठेले को चलाता था रामू।", "voice_style": "gentle narrative tone"}, {"shot_number": 3, "duration": "3s", "description": "Close-up of the puffed rice container on the cart while beach visitors walk past in the background.", "camera_movement_lighting": "Static close-up shot with warm natural lighting and slight breeze movement.", "audio_cue": "Waves continuing softly with light wind.", "voiceover_narration": "लोग समुद्र की ठंडी हवा खाने आते थे, लेकिन उसके ठेले पर बस साधारण सा मुरमुरा ही मिलता था।", "voice_style": "calm storytelling tone"}]}»
+[22:16:52] DEBUG    🖱️  Scroll down 244px
+[22:16:53] DEBUG    🕐 Human delay 2.9s before typing prompt
+[22:16:56] DEBUG    🖱️  Mouse jiggle → (986, 292)
+[22:17:01] DEBUG    Strategy 'textarea' failed: Locator.wait_for: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("textarea").first
+
+[22:17:03] INFO     ✏️  Entered via ProseMirror.
+[22:17:04] DEBUG    ✅ 'prompt in DOM' met on attempt 1/8
+[22:17:04] INFO     ✅ STAGE 5 PASSED: Prompt confirmed in DOM.
+[22:17:04] INFO     STAGE 6: Submitting generation request
+[22:17:04] DEBUG    🕐 Human delay 1.4s before pressing Enter
+[22:17:11] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_after_submit.png
+[22:17:11] INFO     ✅ STAGE 6 PASSED: Generation request submitted.
+[22:17:11] INFO     ⏳ Waiting for generation to complete (looking for 'Make video' or video element) …
+[22:17:11] INFO        ⏳ Still generating … 0s
+[22:17:20] INFO     ✅ 'Make video' button found after 9s — images generated.
+[22:17:20] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_images_done.png
+[22:17:20] INFO     STAGE 7: Clicking 'Make video' button
+[22:17:20] DEBUG    🕐 Human delay 1.3s before clicking Make video
+[22:17:22] DEBUG    🖱️  Mouse jiggle → (640, 382)
+[22:17:22] INFO     🎬 Clicked 'Make video'!
+[22:17:28] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/07_make_video_clicked.png
+[22:17:28] INFO     ⏳ Waiting for video generation (up to 600s) …
+[22:17:28] INFO        ⏳ Video generating … 0s
+[22:17:43] INFO        ⏳ Video generating … 15s
+[22:17:58] INFO        ⏳ Video generating … 30s
+[22:18:13] INFO        ⏳ Video generating … 45s
+[22:18:28] INFO        ⏳ Video generating … 60s
+[22:18:43] INFO        ⏳ Video generating … 75s
+[22:18:46] INFO     ✅ Video element found after 78s!
+[22:18:46] INFO        Video src: https://assets.grok.com/users/8dbf2400-2043-4217-8f1b-f55601499675/generated/3d254199-8a2a-4771-8b8b…
+[22:18:46] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/07_video_generated.png
+[22:18:46] INFO     STAGE 8: Downloading generated video
+[22:18:46] INFO        Trying Strategy 1: Extract video src URL …
+[22:18:46] INFO     🔗 Video URL found: https://assets.grok.com/users/8dbf2400-2043-4217-8f1b-f55601499675/generated/3d254199-8a2a-4771-8b8b-df2702534273/genera…
+[22:18:46] INFO     ⬇️  Downloading video to /home/sonupandit/Documents/ai-vide-api/twitter-automation/output.mp4 …
+[22:18:46] WARNING  ⚠️  Direct download failed: HTTP Error 403: Forbidden — trying Strategy 2.
+[22:18:46] INFO        Trying Strategy 2: Click download button …
+[22:18:46] INFO        Found download element: button[aria-label*="ownload"]
+[22:18:46] INFO     ⬇️  Attempt 1/3 …
+[22:18:51] INFO     ✅ STAGE 8 PASSED (Strategy 2): /home/sonupandit/Documents/ai-vide-api/twitter-automation/output.mp4 (3.09 MB)
+[22:18:51] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/08_download_success.png
+[22:18:51] INFO     
+=======================================================
+[22:18:51] INFO     📊 FINAL STAGE SUMMARY
+[22:18:51] INFO     =======================================================
+[22:18:51] INFO       ✅ LAUNCH          PASSED
+[22:18:51] INFO       ✅ NAVIGATE        PASSED
+[22:18:51] INFO       ✅ VIDEO_MODE      PASSED
+[22:18:51] INFO       ✅ UPLOAD          PASSED
+[22:18:51] INFO       ✅ PROMPT          PASSED
+[22:18:51] INFO       ✅ SUBMIT          PASSED
+[22:18:51] INFO       ✅ MAKE_VIDEO      PASSED
+[22:18:51] INFO       ✅ DOWNLOAD        PASSED
+[22:18:51] INFO        Job End  : 2026-03-05T22:18:51.793754
+[22:18:51] INFO     =======================================================
+[22:18:51] INFO     🎉 SUCCESS!
+[22:18:51] INFO     =======================================================
+[22:18:51] INFO     🚀 Grok Video Generation Automation
+[22:18:51] INFO        Job Start: 2026-03-05T22:18:51.803866
+[22:18:51] INFO        Prompt   : {"shots": [{"shot_number": 1, "duration": "4s", "description": "Group of excited children gathering around Ramu's street food cart on the beach.", "camera_movement_lighting": "Handheld style medium shot with warm sunset lighting and lively beach atmosphere.", "audio_cue": "Children laughing and waves in the background.", "voiceover_narration": "एक दिन कुछ बच्चे खेलते-खेलते रामू के ठेले के पास आ गए।", "voice_style": "cheerful storytelling tone"}, {"shot_number": 2, "duration": "3s", "description": "Children pointing at the puffed rice bowl and talking excitedly to Ramu.", "camera_movement_lighting": "Slow push-in toward the children with bright warm lighting.", "audio_cue": "Children chatter and light beach ambience.", "voiceover_narration": "उन्होंने मुरमुरा देखा और हँसते हुए बोले, 'रामू भैया, इसमें कुछ मज़ेदार डालो ना!'", "voice_style": "playful tone"}, {"shot_number": 3, "duration": "3s", "description": "Ramu looks down at the ingredients on his cart thoughtfully.", "camera_movement_lighting": "Close-up with soft focus and warm golden light.", "audio_cue": "Soft breeze and distant ocean waves.", "voiceover_narration": "रामू ने चारों तरफ देखा और सोच में पड़ गया।", "voice_style": "thoughtful tone"}]}
+[22:18:51] INFO        Image    : /home/sonupandit/Documents/ai-vide-api/twitter-automation/default.png
+[22:18:51] INFO        Output   : /home/sonupandit/Documents/ai-vide-api/twitter-automation/output.mp4
+[22:18:51] INFO     =======================================================
+[22:18:52] INFO     STAGE 1: Launching Chrome
+[22:18:52] INFO     ✅ STAGE 1 PASSED: Chrome launched.
+[22:18:52] INFO     STAGE 2: Navigating to Grok
+[22:18:54] INFO     ⏳ Waiting 7.1s for UI to settle …
+[22:19:01] DEBUG    🖱️  Scroll down 210px
+[22:19:02] DEBUG    🖱️  Mouse jiggle → (963, 472)
+[22:19:02] INFO     ✅ STAGE 2 PASSED: Page loaded.
+[22:19:02] DEBUG    🕐 Human delay 2.8s post-navigation
+[22:19:05] INFO     STAGE 3: Ensuring Video mode is selected
+[22:19:05] DEBUG    🕐 Human delay 1.0s before checking mode
+[22:19:06] INFO        Current mode button text: 'Video'
+[22:19:06] INFO     ✅ STAGE 3 PASSED: Already in Video mode.
+[22:19:06] INFO     STAGE 4: Uploading image
+[22:19:06] INFO     🖼️  Image: /home/sonupandit/Documents/ai-vide-api/twitter-automation/default.png (7.52 MB)
+[22:19:06] INFO     📤 File set on input.
+[22:19:06] DEBUG    🕐 Human delay 1.5s after file select
+[22:19:08] DEBUG    ✅ 'upload visible' met on attempt 1/20
+[22:19:08] INFO     ✅ STAGE 4 PASSED: Image visible in UI.
+[22:19:08] INFO     ⏳ Waiting 60s for Grok to process image …
+[22:19:18] INFO        … 50s remaining
+[22:19:28] INFO        … 40s remaining
+[22:19:38] INFO        … 30s remaining
+[22:19:48] INFO        … 20s remaining
+[22:19:58] INFO        … 10s remaining
+[22:20:08] INFO     STAGE 5: Entering prompt
+[22:20:08] INFO     📝 «{"shots": [{"shot_number": 1, "duration": "4s", "description": "Group of excited children gathering around Ramu's street food cart on the beach.", "camera_movement_lighting": "Handheld style medium shot with warm sunset lighting and lively beach atmosphere.", "audio_cue": "Children laughing and waves in the background.", "voiceover_narration": "एक दिन कुछ बच्चे खेलते-खेलते रामू के ठेले के पास आ गए।", "voice_style": "cheerful storytelling tone"}, {"shot_number": 2, "duration": "3s", "description": "Children pointing at the puffed rice bowl and talking excitedly to Ramu.", "camera_movement_lighting": "Slow push-in toward the children with bright warm lighting.", "audio_cue": "Children chatter and light beach ambience.", "voiceover_narration": "उन्होंने मुरमुरा देखा और हँसते हुए बोले, 'रामू भैया, इसमें कुछ मज़ेदार डालो ना!'", "voice_style": "playful tone"}, {"shot_number": 3, "duration": "3s", "description": "Ramu looks down at the ingredients on his cart thoughtfully.", "camera_movement_lighting": "Close-up with soft focus and warm golden light.", "audio_cue": "Soft breeze and distant ocean waves.", "voiceover_narration": "रामू ने चारों तरफ देखा और सोच में पड़ गया।", "voice_style": "thoughtful tone"}]}»
+[22:20:08] DEBUG    🖱️  Scroll down 339px
+[22:20:08] DEBUG    🕐 Human delay 2.4s before typing prompt
+[22:20:11] DEBUG    🖱️  Mouse jiggle → (551, 425)
+[22:20:16] DEBUG    Strategy 'textarea' failed: Locator.wait_for: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("textarea").first
+
+[22:20:18] INFO     ✏️  Entered via ProseMirror.
+[22:20:19] DEBUG    ✅ 'prompt in DOM' met on attempt 1/8
+[22:20:19] INFO     ✅ STAGE 5 PASSED: Prompt confirmed in DOM.
+[22:20:19] INFO     STAGE 6: Submitting generation request
+[22:20:19] DEBUG    🕐 Human delay 0.9s before pressing Enter
+[22:20:25] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_after_submit.png
+[22:20:25] INFO     ✅ STAGE 6 PASSED: Generation request submitted.
+[22:20:25] INFO     ⏳ Waiting for generation to complete (looking for 'Make video' or video element) …
+[22:20:25] INFO        ⏳ Still generating … 0s
+[22:20:28] INFO     ✅ 'Make video' button found after 3s — images generated.
+[22:20:28] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_images_done.png
+[22:20:28] INFO     STAGE 7: Clicking 'Make video' button
+[22:20:28] DEBUG    🕐 Human delay 2.3s before clicking Make video
+[22:20:30] DEBUG    🖱️  Mouse jiggle → (311, 380)
+[22:20:31] INFO     🎬 Clicked 'Make video'!
+[22:20:38] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/07_make_video_clicked.png
+[22:20:38] INFO     ⏳ Waiting for video generation (up to 600s) …
+[22:20:38] INFO        ⏳ Video generating … 0s
+[22:20:53] INFO        ⏳ Video generating … 15s
+[22:21:08] INFO        ⏳ Video generating … 30s
+[22:21:23] INFO        ⏳ Video generating … 45s
+[22:21:38] INFO        ⏳ Video generating … 60s
+[22:21:53] INFO        ⏳ Video generating … 75s
+[22:22:08] INFO        ⏳ Video generating … 90s
+[22:22:11] INFO     ✅ Video element found after 93s!
+[22:22:11] INFO        Video src: https://assets.grok.com/users/8dbf2400-2043-4217-8f1b-f55601499675/generated/cfdbdfae-520a-47f5-be2f…
+[22:22:11] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/07_video_generated.png
+[22:22:11] INFO     STAGE 8: Downloading generated video
+[22:22:11] INFO        Trying Strategy 1: Extract video src URL …
+[22:22:11] INFO     🔗 Video URL found: https://assets.grok.com/users/8dbf2400-2043-4217-8f1b-f55601499675/generated/cfdbdfae-520a-47f5-be2f-a04cc9d15cc0/genera…
+[22:22:11] INFO     ⬇️  Downloading video to /home/sonupandit/Documents/ai-vide-api/twitter-automation/output.mp4 …
+[22:22:11] WARNING  ⚠️  Direct download failed: HTTP Error 403: Forbidden — trying Strategy 2.
+[22:22:11] INFO        Trying Strategy 2: Click download button …
+[22:22:11] INFO        Found download element: button[aria-label*="ownload"]
+[22:22:11] INFO     ⬇️  Attempt 1/3 …
+[22:22:14] INFO     ✅ STAGE 8 PASSED (Strategy 2): /home/sonupandit/Documents/ai-vide-api/twitter-automation/output.mp4 (3.44 MB)
+[22:22:14] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/08_download_success.png
+[22:22:14] INFO     
+=======================================================
+[22:22:14] INFO     📊 FINAL STAGE SUMMARY
+[22:22:14] INFO     =======================================================
+[22:22:14] INFO       ✅ LAUNCH          PASSED
+[22:22:14] INFO       ✅ NAVIGATE        PASSED
+[22:22:14] INFO       ✅ VIDEO_MODE      PASSED
+[22:22:14] INFO       ✅ UPLOAD          PASSED
+[22:22:14] INFO       ✅ PROMPT          PASSED
+[22:22:14] INFO       ✅ SUBMIT          PASSED
+[22:22:14] INFO       ✅ MAKE_VIDEO      PASSED
+[22:22:14] INFO       ✅ DOWNLOAD        PASSED
+[22:22:14] INFO        Job End  : 2026-03-05T22:22:14.968870
+[22:22:14] INFO     =======================================================
+[22:22:14] INFO     🎉 SUCCESS!
+[22:22:14] INFO     =======================================================
+[22:22:14] INFO     🚀 Grok Video Generation Automation
+[22:22:14] INFO        Job Start: 2026-03-05T22:22:14.970262
+[22:22:14] INFO        Prompt   : {"shots": [{"shot_number": 1, "duration": "4s", "description": "Group of excited children gathering around Ramu's street food cart on the beach.", "camera_movement_lighting": "Handheld style medium shot with warm sunset lighting and lively beach atmosphere.", "audio_cue": "Children laughing and waves in the background.", "voiceover_narration": "एक दिन कुछ बच्चे खेलते-खेलते रामू के ठेले के पास आ गए।", "voice_style": "cheerful storytelling tone"}, {"shot_number": 2, "duration": "3s", "description": "Children pointing at the puffed rice bowl and talking excitedly to Ramu.", "camera_movement_lighting": "Slow push-in toward the children with bright warm lighting.", "audio_cue": "Children chatter and light beach ambience.", "voiceover_narration": "उन्होंने मुरमुरा देखा और हँसते हुए बोले, 'रामू भैया, इसमें कुछ मज़ेदार डालो ना!'", "voice_style": "playful tone"}, {"shot_number": 3, "duration": "3s", "description": "Ramu looks down at the ingredients on his cart thoughtfully.", "camera_movement_lighting": "Close-up with soft focus and warm golden light.", "audio_cue": "Soft breeze and distant ocean waves.", "voiceover_narration": "रामू ने चारों तरफ देखा और सोच में पड़ गया।", "voice_style": "thoughtful tone"}]}
+[22:22:14] INFO        Image    : /home/sonupandit/Documents/ai-vide-api/twitter-automation/default.png
+[22:22:14] INFO        Output   : /home/sonupandit/Documents/ai-vide-api/twitter-automation/output.mp4
+[22:22:14] INFO     =======================================================
+[22:22:15] INFO     STAGE 1: Launching Chrome
+[22:22:15] INFO     ✅ STAGE 1 PASSED: Chrome launched.
+[22:22:15] INFO     STAGE 2: Navigating to Grok
+[22:22:16] INFO     ⏳ Waiting 7.2s for UI to settle …
+[22:22:23] DEBUG    🖱️  Scroll up 226px
+[22:22:24] DEBUG    🖱️  Mouse jiggle → (512, 206)
+[22:22:24] INFO     ✅ STAGE 2 PASSED: Page loaded.
+[22:22:24] DEBUG    🕐 Human delay 2.2s post-navigation
+[22:22:27] INFO     STAGE 3: Ensuring Video mode is selected
+[22:22:27] DEBUG    🕐 Human delay 0.9s before checking mode
+[22:22:27] INFO        Current mode button text: 'Video'
+[22:22:27] INFO     ✅ STAGE 3 PASSED: Already in Video mode.
+[22:22:27] INFO     STAGE 4: Uploading image
+[22:22:27] INFO     🖼️  Image: /home/sonupandit/Documents/ai-vide-api/twitter-automation/default.png (7.52 MB)
+[22:22:27] INFO     📤 File set on input.
+[22:22:27] DEBUG    🕐 Human delay 1.4s after file select
+[22:22:29] DEBUG    ✅ 'upload visible' met on attempt 1/20
+[22:22:29] INFO     ✅ STAGE 4 PASSED: Image visible in UI.
+[22:22:29] INFO     ⏳ Waiting 60s for Grok to process image …
+[22:22:39] INFO        … 50s remaining
+[22:22:49] INFO        … 40s remaining
+[22:22:59] INFO        … 30s remaining
+[22:23:09] INFO        … 20s remaining
+[22:23:19] INFO        … 10s remaining
+[22:23:29] INFO     STAGE 5: Entering prompt
+[22:23:29] INFO     📝 «{"shots": [{"shot_number": 1, "duration": "4s", "description": "Group of excited children gathering around Ramu's street food cart on the beach.", "camera_movement_lighting": "Handheld style medium shot with warm sunset lighting and lively beach atmosphere.", "audio_cue": "Children laughing and waves in the background.", "voiceover_narration": "एक दिन कुछ बच्चे खेलते-खेलते रामू के ठेले के पास आ गए।", "voice_style": "cheerful storytelling tone"}, {"shot_number": 2, "duration": "3s", "description": "Children pointing at the puffed rice bowl and talking excitedly to Ramu.", "camera_movement_lighting": "Slow push-in toward the children with bright warm lighting.", "audio_cue": "Children chatter and light beach ambience.", "voiceover_narration": "उन्होंने मुरमुरा देखा और हँसते हुए बोले, 'रामू भैया, इसमें कुछ मज़ेदार डालो ना!'", "voice_style": "playful tone"}, {"shot_number": 3, "duration": "3s", "description": "Ramu looks down at the ingredients on his cart thoughtfully.", "camera_movement_lighting": "Close-up with soft focus and warm golden light.", "audio_cue": "Soft breeze and distant ocean waves.", "voiceover_narration": "रामू ने चारों तरफ देखा और सोच में पड़ गया।", "voice_style": "thoughtful tone"}]}»
+[22:23:29] DEBUG    🖱️  Scroll down 167px
+[22:23:30] DEBUG    🕐 Human delay 1.3s before typing prompt
+[22:23:31] DEBUG    🖱️  Mouse jiggle → (486, 551)
+[22:23:36] DEBUG    Strategy 'textarea' failed: Locator.wait_for: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("textarea").first
+
+[22:23:38] INFO     ✏️  Entered via ProseMirror.
+[22:23:39] DEBUG    ✅ 'prompt in DOM' met on attempt 1/8
+[22:23:39] INFO     ✅ STAGE 5 PASSED: Prompt confirmed in DOM.
+[22:23:39] INFO     STAGE 6: Submitting generation request
+[22:23:39] DEBUG    🕐 Human delay 1.1s before pressing Enter
+[22:23:46] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_after_submit.png
+[22:23:46] INFO     ✅ STAGE 6 PASSED: Generation request submitted.
+[22:23:46] INFO     ⏳ Waiting for generation to complete (looking for 'Make video' or video element) …
+[22:23:46] INFO        ⏳ Still generating … 0s
+[22:23:49] INFO     ✅ 'Make video' button found after 3s — images generated.
+[22:23:49] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_images_done.png
+[22:23:49] INFO     STAGE 7: Clicking 'Make video' button
+[22:23:49] DEBUG    🕐 Human delay 1.5s before clicking Make video
+[22:23:50] DEBUG    🖱️  Mouse jiggle → (445, 259)
+[22:23:51] INFO     🎬 Clicked 'Make video'!
+[22:23:56] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/07_make_video_clicked.png
+[22:23:56] INFO     ⏳ Waiting for video generation (up to 600s) …
+[22:23:56] INFO        ⏳ Video generating … 0s
+[22:24:11] INFO        ⏳ Video generating … 15s
+[22:24:26] INFO        ⏳ Video generating … 30s
+[22:24:41] INFO        ⏳ Video generating … 45s
+[22:24:56] INFO        ⏳ Video generating … 60s
+[22:25:11] INFO        ⏳ Video generating … 75s
+[22:25:20] INFO     ✅ Video element found after 84s!
+[22:25:20] INFO        Video src: https://assets.grok.com/users/8dbf2400-2043-4217-8f1b-f55601499675/generated/30dcba63-a9a7-4d3e-9c5f…
+[22:25:20] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/07_video_generated.png
+[22:25:20] INFO     STAGE 8: Downloading generated video
+[22:25:20] INFO        Trying Strategy 1: Extract video src URL …
+[22:25:20] INFO     🔗 Video URL found: https://assets.grok.com/users/8dbf2400-2043-4217-8f1b-f55601499675/generated/30dcba63-a9a7-4d3e-9c5f-3aba178c6164/genera…
+[22:25:20] INFO     ⬇️  Downloading video to /home/sonupandit/Documents/ai-vide-api/twitter-automation/output.mp4 …
+[22:25:20] WARNING  ⚠️  Direct download failed: HTTP Error 403: Forbidden — trying Strategy 2.
+[22:25:20] INFO        Trying Strategy 2: Click download button …
+[22:25:20] INFO        Found download element: button[aria-label*="ownload"]
+[22:25:20] INFO     ⬇️  Attempt 1/3 …
+[22:25:22] INFO     ✅ STAGE 8 PASSED (Strategy 2): /home/sonupandit/Documents/ai-vide-api/twitter-automation/output.mp4 (3.18 MB)
+[22:25:22] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/08_download_success.png
+[22:25:23] INFO     
+=======================================================
+[22:25:23] INFO     📊 FINAL STAGE SUMMARY
+[22:25:23] INFO     =======================================================
+[22:25:23] INFO       ✅ LAUNCH          PASSED
+[22:25:23] INFO       ✅ NAVIGATE        PASSED
+[22:25:23] INFO       ✅ VIDEO_MODE      PASSED
+[22:25:23] INFO       ✅ UPLOAD          PASSED
+[22:25:23] INFO       ✅ PROMPT          PASSED
+[22:25:23] INFO       ✅ SUBMIT          PASSED
+[22:25:23] INFO       ✅ MAKE_VIDEO      PASSED
+[22:25:23] INFO       ✅ DOWNLOAD        PASSED
+[22:25:23] INFO        Job End  : 2026-03-05T22:25:23.208903
+[22:25:23] INFO     =======================================================
+[22:25:23] INFO     🎉 SUCCESS!
+[22:25:23] INFO     =======================================================
+[22:25:23] INFO     🚀 Grok Video Generation Automation
+[22:25:23] INFO        Job Start: 2026-03-05T22:25:23.212021
+[22:25:23] INFO        Prompt   : {"shots": [{"shot_number": 1, "duration": "4s", "description": "Close-up of Ramu mixing puffed rice with onions tomatoes sev and tamarind chutney in a steel bowl.", "camera_movement_lighting": "Dynamic close-up shot with fast hand movement and warm sunset lighting.", "audio_cue": "Mixing sounds and gentle beach ambience.", "voiceover_narration": "फिर रामू ने प्याज़, टमाटर, हरी मिर्च, नमकीन सेव और इमली की चटनी मुरमुरे में डालकर सब कुछ अच्छे से मिला दिया।", "voice_style": "excited storytelling tone"}, {"shot_number": 2, "duration": "3s", "description": "Children eagerly tasting the snack for the first time with curious expressions.", "camera_movement_lighting": "Medium shot with slight handheld motion capturing excitement.", "audio_cue": "Children reacting with surprise and joy.", "voiceover_narration": "जैसे ही बच्चों ने खाया, वे खुशी से चिल्लाए — 'वाह! ये तो बहुत स्वादिष्ट है!'", "voice_style": "joyful tone"}, {"shot_number": 3, "duration": "3s", "description": "Ramu smiling proudly while serving more of the snack to happy children.", "camera_movement_lighting": "Slow cinematic push-in with warm golden light creating a celebratory mood.", "audio_cue": "Happy laughter and soft ocean waves.", "voiceover_narration": "और उसी दिन जन्म हुआ मशहूर भेलपुरी का।", "voice_style": "proud storytelling tone"}]}
+[22:25:23] INFO        Image    : /home/sonupandit/Documents/ai-vide-api/twitter-automation/default.png
+[22:25:23] INFO        Output   : /home/sonupandit/Documents/ai-vide-api/twitter-automation/output.mp4
+[22:25:23] INFO     =======================================================
+[22:25:23] INFO     STAGE 1: Launching Chrome
+[22:25:23] INFO     ✅ STAGE 1 PASSED: Chrome launched.
+[22:25:23] INFO     STAGE 2: Navigating to Grok
+[22:25:24] INFO     ⏳ Waiting 8.9s for UI to settle …
+[22:25:33] DEBUG    🖱️  Scroll up 266px
+[22:25:34] DEBUG    🖱️  Mouse jiggle → (1008, 468)
+[22:25:35] INFO     ✅ STAGE 2 PASSED: Page loaded.
+[22:25:35] DEBUG    🕐 Human delay 1.7s post-navigation
+[22:25:36] INFO     STAGE 3: Ensuring Video mode is selected
+[22:25:36] DEBUG    🕐 Human delay 1.5s before checking mode
+[22:25:38] INFO        Current mode button text: 'Video'
+[22:25:38] INFO     ✅ STAGE 3 PASSED: Already in Video mode.
+[22:25:38] INFO     STAGE 4: Uploading image
+[22:25:38] INFO     🖼️  Image: /home/sonupandit/Documents/ai-vide-api/twitter-automation/default.png (7.52 MB)
+[22:25:38] INFO     📤 File set on input.
+[22:25:38] DEBUG    🕐 Human delay 1.7s after file select
+[22:25:40] DEBUG    ✅ 'upload visible' met on attempt 1/20
+[22:25:40] INFO     ✅ STAGE 4 PASSED: Image visible in UI.
+[22:25:40] INFO     ⏳ Waiting 60s for Grok to process image …
+[22:25:50] INFO        … 50s remaining

@@ -76,15 +76,23 @@ app = FastAPI(
 class PromptBody(BaseModel):
     prompt: str
 
-from typing import List
+from typing import List, Any, Union, Optional
+import json
 
 class ModulePayload(BaseModel):
     module_number: int
-    video_generation_prompt: str
+    video_generation_prompt: Any
+
+    class Config:
+        extra = "allow"
 
 class StoryPayload(BaseModel):
-    story_id: str
+    id: Optional[Union[int, str]] = None
+    story_id: Optional[Union[int, str]] = None
     modules: List[ModulePayload]
+
+    class Config:
+        extra = "allow"
 
 class TestPayload(BaseModel):
     stories: List[StoryPayload]
@@ -136,32 +144,39 @@ def _cleanup(path: str) -> None:
         log.warning(f"Cleanup failed for {path}: {e}")
 
 
-async def _process_payload_sequentially(payload: TestPayload):
-    for story in payload.stories:
+async def _process_payload_sequentially(payload: Union[TestPayload, List[StoryPayload]]):
+    stories = payload.stories if isinstance(payload, TestPayload) else payload
+    
+    for story in stories:
+        current_story_id = story.story_id if story.story_id is not None else story.id
         # Sort modules by module_number to ensure strict sequential processing
         modules = sorted(story.modules, key=lambda m: m.module_number)
         
         for module in modules:
             prompt = module.video_generation_prompt
+            if not isinstance(prompt, str):
+                import json
+                prompt = json.dumps(prompt, ensure_ascii=False)
+                
             success = False
             retries = 0
             max_retries = 3
             
             while retries <= max_retries and not success:
-                log.info(f"[story_id: {story.story_id}] [module_number: {module.module_number}] video generation start (Attempt {retries + 1})")
+                log.info(f"[story_id: {current_story_id}] [module_number: {module.module_number}] video generation start (Attempt {retries + 1})")
                 try:
                     video_path = await _run_generation(prompt)
-                    log.info(f"[story_id: {story.story_id}] [module_number: {module.module_number}] success (file: {video_path})")
+                    log.info(f"[story_id: {current_story_id}] [module_number: {module.module_number}] success (file: {video_path})")
                     success = True
                 except Exception as e:
-                    log.error(f"[story_id: {story.story_id}] [module_number: {module.module_number}] failure: {e}")
+                    log.error(f"[story_id: {current_story_id}] [module_number: {module.module_number}] failure: {e}")
                     if retries < max_retries:
-                        log.info(f"[story_id: {story.story_id}] [module_number: {module.module_number}] retry attempt {retries + 1}")
+                        log.info(f"[story_id: {current_story_id}] [module_number: {module.module_number}] retry attempt {retries + 1}")
                         await asyncio.sleep(5)
                     retries += 1
                     
             if not success:
-                log.error(f"[story_id: {story.story_id}] stopped processing story due to module {module.module_number} failure after {max_retries} retries")
+                log.error(f"[story_id: {current_story_id}] stopped processing story due to module {module.module_number} failure after {max_retries} retries")
                 break
 
 
@@ -216,7 +231,7 @@ async def post_video(body: PromptBody, background_tasks: BackgroundTasks):
     "/api/process_payload",
     summary="Process a test payload sequentially",
 )
-async def process_test_payload(payload: TestPayload, background_tasks: BackgroundTasks):
+async def process_test_payload(payload: Union[TestPayload, List[StoryPayload]], background_tasks: BackgroundTasks):
     """
     Process a payload of stories with sequential video generation modules.
     """
