@@ -1,0 +1,120 @@
+[
+  {
+    "id": 1,
+    "title": "भेलपुरी की शुरुआत",
+    "duration": "25-30 seconds",
+    "modules": [
+      {
+        "module_number": 1,
+        "time": "0-10 sec",
+        "voiceover": "बहुत साल पहले मुंबई के चौपाटी समुद्र किनारे एक छोटा सा ठेला लगता था। उस ठेले को चलाता था रामू। लोग समुद्र की ठंडी हवा खाने आते थे, लेकिन उसके ठेले पर बस साधारण सा मुरमुरा ही मिलता था।",
+        "image_generation_prompt": "cinematic wide shot of old Mumbai Chowpatty beach during sunset, a humble Indian street vendor named Ramu standing beside a small wooden cart filled with puffed rice, waves hitting the shore, people walking along the beach, warm golden sunlight reflecting on water, early 1900s Bombay atmosphere, earthy tones, cinematic lighting, high detail",
+        "video_generation_prompt": {
+          "shots": [
+            {
+              "shot_number": 1,
+              "duration": "4s",
+              "description": "Wide establishing shot of Mumbai Chowpatty beach at sunset with waves gently hitting the shore and people walking along the sand.",
+              "camera_movement_lighting": "Slow cinematic pan across the beach with warm golden sunset lighting reflecting on the water.",
+              "audio_cue": "Ocean waves and distant seagulls with light evening ambience.",
+              "voiceover_narration": "बहुत साल पहले मुंबई के चौपाटी समुद्र किनारे एक छोटा सा ठेला लगता था।",
+              "voice_style": "warm storytelling tone"
+            },
+            {
+              "shot_number": 2,
+              "duration": "3s",
+              "description": "Medium shot of a humble street vendor Ramu standing beside his wooden cart filled with puffed rice.",
+              "camera_movement_lighting": "Slow push-in camera movement with soft sunset light illuminating the cart.",
+              "audio_cue": "Soft beach ambience with distant chatter of people.",
+              "voiceover_narration": "उस ठेले को चलाता था रामू।",
+              "voice_style": "gentle narrative tone"
+            },
+            {
+              "shot_number": 3,
+              "duration": "3s",
+              "description": "Close-up of the puffed rice container on the cart while beach visitors walk past in the background.",
+              "camera_movement_lighting": "Static close-up shot with warm natural lighting and slight breeze movement.",
+              "audio_cue": "Waves continuing softly with light wind.",
+              "voiceover_narration": "लोग समुद्र की ठंडी हवा खाने आते थे, लेकिन उसके ठेले पर बस साधारण सा मुरमुरा ही मिलता था।",
+              "voice_style": "calm storytelling tone"
+            }
+          ]
+        }
+      },
+      {
+        "module_number": 2,
+        "time": "10-20 sec",
+        "voiceover": "एक दिन कुछ बच्चे खेलते-खेलते रामू के ठेले के पास आ गए। उन्होंने मुरमुरा देखा और हँसते हुए बोले, 'रामू भैया, इसमें कुछ मज़ेदार डालो ना!' रामू ने चारों तरफ देखा और सोच में पड़ गया।",
+        "image_generation_prompt": "cinematic scene of cheerful Indian children gathered around a beach street food cart, curious expressions on their faces, Ramu the vendor looking thoughtful while standing behind the cart, bowls of chopped onions tomatoes green chilies sev and tamarind chutney visible, old Bombay beach atmosphere, warm evening light, cinematic composition",
+        "video_generation_prompt": {
+          "shots": [
+            {
+              "shot_number": 1,
+              "duration": "4s",
+              "description": "Group of excited children gathering around Ramu's street food cart on the beach.",
+              "camera_movement_lighting": "Handheld style medium shot with warm sunset lighting and lively beach atmosphere.",
+              "audio_cue": "Children laughing and waves in the background.",
+              "voiceover_narration": "एक दिन कुछ बच्चे खेलते-खेलते रामू के ठेले के पास आ गए।",
+              "voice_style": "cheerful storytelling tone"
+            },
+            {
+              "shot_number": 2,
+              "duration": "3s",
+              "description": "Children pointing at the puffed rice bowl and talking excitedly to Ramu.",
+              "camera_movement_lighting": "Slow push-in toward the children with bright warm lighting.",
+              "audio_cue": "Children chatter and light beach ambience.",
+              "voiceover_narration": "उन्होंने मुरमुरा देखा और हँसते हुए बोले, 'रामू भैया, इसमें कुछ मज़ेदार डालो ना!'",
+              "voice_style": "playful tone"
+            },
+            {
+              "shot_number": 3,
+              "duration": "3s",
+              "description": "Ramu looks down at the ingredients on his cart thoughtfully.",
+              "camera_movement_lighting": "Close-up with soft focus and warm golden light.",
+              "audio_cue": "Soft breeze and distant ocean waves.",
+              "voiceover_narration": "रामू ने चारों तरफ देखा और सोच में पड़ गया।",
+              "voice_style": "thoughtful tone"
+            }
+          ]
+        }
+      },
+      {
+        "module_number": 3,
+        "time": "20-30 sec",
+        "voiceover": "फिर रामू ने प्याज़, टमाटर, हरी मिर्च, नमकीन सेव और इमली की चटनी मुरमुरे में डालकर सब कुछ अच्छे से मिला दिया। जैसे ही बच्चों ने खाया, वे खुशी से चिल्लाए — 'वाह! ये तो बहुत स्वादिष्ट है!' और उसी दिन जन्म हुआ मशहूर भेलपुरी का।",
+        "image_generation_prompt": "cinematic close-up of Indian street vendor mixing puffed rice with chopped onions tomatoes green chilies sev and tamarind chutney in a large steel bowl on a wooden cart, children watching excitedly, vintage Mumbai beach street food scene, warm sunset glow, vibrant food textures, cinematic lighting, high detail",
+        "video_generation_prompt": {
+          "shots": [
+            {
+              "shot_number": 1,
+              "duration": "4s",
+              "description": "Close-up of Ramu mixing puffed rice with onions tomatoes sev and tamarind chutney in a steel bowl.",
+              "camera_movement_lighting": "Dynamic close-up shot with fast hand movement and warm sunset lighting.",
+              "audio_cue": "Mixing sounds and gentle beach ambience.",
+              "voiceover_narration": "फिर रामू ने प्याज़, टमाटर, हरी मिर्च, नमकीन सेव और इमली की चटनी मुरमुरे में डालकर सब कुछ अच्छे से मिला दिया।",
+              "voice_style": "excited storytelling tone"
+            },
+            {
+              "shot_number": 2,
+              "duration": "3s",
+              "description": "Children eagerly tasting the snack for the first time with curious expressions.",
+              "camera_movement_lighting": "Medium shot with slight handheld motion capturing excitement.",
+              "audio_cue": "Children reacting with surprise and joy.",
+              "voiceover_narration": "जैसे ही बच्चों ने खाया, वे खुशी से चिल्लाए — 'वाह! ये तो बहुत स्वादिष्ट है!'",
+              "voice_style": "joyful tone"
+            },
+            {
+              "shot_number": 3,
+              "duration": "3s",
+              "description": "Ramu smiling proudly while serving more of the snack to happy children.",
+              "camera_movement_lighting": "Slow cinematic push-in with warm golden light creating a celebratory mood.",
+              "audio_cue": "Happy laughter and soft ocean waves.",
+              "voiceover_narration": "और उसी दिन जन्म हुआ मशहूर भेलपुरी का।",
+              "voice_style": "proud storytelling tone"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

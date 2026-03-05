@@ -1,0 +1,278 @@
+INFO:     Started server process [42037]
+INFO:     Waiting for application startup.
+[15:40:05] INFO     🚀 GrokAPI server starting …
+[15:40:05] INFO        Videos dir: /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+Received Payload: [{'id': 1, 'title': 'सोने की मुर्गी', 'duration': '25-30 seconds', 'modules': [{'module_number': 1, 'time': '0-10 sec', 'voiceover': 'मेरा बेटा, मेरी सोने की मुर्गी...', 'image_generation_prompt': 'cinematic medium shot...', 'video_generation_prompt': '{\n"shots":[\n{\n"shot_number":1,\n"duration":"4s",\n"description":"Close-up on the smiling face..."}\n]\n}'}, {'module_number': 2, 'time': '10-20 sec', 'voiceover': 'मैंने उसे हर खुशी से दूर कर दिया था...', 'image_generation_prompt': 'cinematic shot...', 'video_generation_prompt': '{\n"shots":[\n{\n"shot_number":1,\n"duration":"5s",\n"description":"The studious Indian boy sits at his desk..."}\n]\n}'}]}]
+INFO:     127.0.0.1:39246 - "POST /api/getvideo HTTP/1.1" 200 OK
+[15:40:38] INFO     Starting background processing for 1 stories.
+[15:40:38] INFO     Generating VIDEO for Module 1
+[15:40:38] INFO     [90fdb1e2] Queued: «{
+"shots":[
+{
+"shot_number":1,
+"duration":"4s",
+"description»
+[15:40:38] INFO     [90fdb1e2] Starting …
+[15:40:38] INFO     📋 Full debug log → automation_20260304_154038.log
+[15:40:38] INFO     📋 Full debug log → automation_20260304_154038.log
+[15:40:38] INFO     =======================================================
+[15:40:38] INFO     =======================================================
+[15:40:38] INFO     🚀 Grok Video Generation Automation
+[15:40:38] INFO     🚀 Grok Video Generation Automation
+[15:40:38] INFO        Job Start: 2026-03-04T15:40:38.950604
+[15:40:38] INFO        Job Start: 2026-03-04T15:40:38.950604
+[15:40:38] INFO        Prompt   : {
+"shots":[
+{
+"shot_number":1,
+"duration":"4s",
+"description":"Close-up on the smiling face..."}
+]
+}
+[15:40:38] INFO        Prompt   : {
+"shots":[
+{
+"shot_number":1,
+"duration":"4s",
+"description":"Close-up on the smiling face..."}
+]
+}
+[15:40:38] INFO        Image    : /home/sonupandit/Documents/ai-vide-api/twitter-automation/default.png
+[15:40:38] INFO        Image    : /home/sonupandit/Documents/ai-vide-api/twitter-automation/default.png
+[15:40:38] INFO        Output   : /home/sonupandit/Documents/ai-vide-api/twitter-automation/video/module_1.mp4
+[15:40:38] INFO        Output   : /home/sonupandit/Documents/ai-vide-api/twitter-automation/video/module_1.mp4
+[15:40:38] INFO     =======================================================
+[15:40:38] INFO     =======================================================
+[15:40:39] INFO     STAGE 1: Launching Chrome
+[15:40:39] INFO     STAGE 1: Launching Chrome
+[15:40:39] INFO     ✅ STAGE 1 PASSED: Chrome launched.
+[15:40:39] INFO     ✅ STAGE 1 PASSED: Chrome launched.
+[15:40:39] INFO     STAGE 2: Navigating to Grok
+[15:40:39] INFO     STAGE 2: Navigating to Grok
+[15:40:42] INFO     ⏳ Waiting 7.0s for UI to settle …
+[15:40:42] INFO     ⏳ Waiting 7.0s for UI to settle …
+[15:40:49] DEBUG    🖱️  Scroll up 118px
+[15:40:49] DEBUG    🖱️  Mouse jiggle → (321, 501)
+[15:40:50] INFO     ✅ STAGE 2 PASSED: Page loaded.
+[15:40:50] INFO     ✅ STAGE 2 PASSED: Page loaded.
+[15:40:50] DEBUG    🕐 Human delay 1.2s post-navigation
+[15:40:51] INFO     STAGE 3: Ensuring Video mode is selected
+[15:40:51] INFO     STAGE 3: Ensuring Video mode is selected
+[15:40:51] DEBUG    🕐 Human delay 0.9s before checking mode
+[15:40:52] WARNING  ⚠️  Settings button not found — trying to continue anyway.
+[15:40:52] WARNING  ⚠️  Settings button not found — trying to continue anyway.
+[15:40:52] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/03_no_settings_btn.png
+[15:40:52] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/03_no_settings_btn.png
+[15:40:52] INFO     STAGE 4: Uploading image
+[15:40:52] INFO     STAGE 4: Uploading image
+[15:40:52] INFO     🖼️  Image: /home/sonupandit/Documents/ai-vide-api/twitter-automation/default.png (7.52 MB)
+[15:40:52] INFO     🖼️  Image: /home/sonupandit/Documents/ai-vide-api/twitter-automation/default.png (7.52 MB)
+[15:40:52] INFO     📤 File set on input.
+[15:40:52] INFO     📤 File set on input.
+[15:40:52] DEBUG    🕐 Human delay 2.7s after file select
+[15:40:55] DEBUG    ✅ 'upload visible' met on attempt 1/20
+[15:40:55] INFO     ✅ STAGE 4 PASSED: Image visible in UI.
+[15:40:55] INFO     ✅ STAGE 4 PASSED: Image visible in UI.
+[15:40:55] INFO     ⏳ Waiting 60s for Grok to process image …
+[15:40:55] INFO     ⏳ Waiting 60s for Grok to process image …
+[15:41:05] INFO        … 50s remaining
+[15:41:05] INFO        … 50s remaining
+[15:41:15] INFO        … 40s remaining
+[15:41:15] INFO        … 40s remaining
+[15:41:25] INFO        … 30s remaining
+[15:41:25] INFO        … 30s remaining
+[15:41:35] INFO        … 20s remaining
+[15:41:35] INFO        … 20s remaining
+[15:41:45] INFO        … 10s remaining
+[15:41:45] INFO        … 10s remaining
+[15:41:55] INFO     STAGE 5: Entering prompt
+[15:41:55] INFO     STAGE 5: Entering prompt
+[15:41:55] INFO     📝 «{
+"shots":[
+{
+"shot_number":1,
+"duration":"4s",
+"description":"Close-up on the smiling face..."}
+]
+}»
+[15:41:55] INFO     📝 «{
+"shots":[
+{
+"shot_number":1,
+"duration":"4s",
+"description":"Close-up on the smiling face..."}
+]
+}»
+[15:41:55] DEBUG    🖱️  Scroll up 122px
+[15:41:55] DEBUG    🕐 Human delay 2.6s before typing prompt
+[15:41:58] DEBUG    🖱️  Mouse jiggle → (277, 394)
+[15:42:03] DEBUG    Strategy 'textarea' failed: Locator.wait_for: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("textarea").first
+
+[15:42:05] INFO     ✏️  Entered via ProseMirror.
+[15:42:05] INFO     ✏️  Entered via ProseMirror.
+[15:42:06] DEBUG    Poll [prompt in DOM] attempt 1: Page.evaluate: SyntaxError: Invalid or unexpected token
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:290:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[15:42:07] DEBUG    Poll [prompt in DOM] attempt 2: Page.evaluate: SyntaxError: Invalid or unexpected token
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:290:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[15:42:08] DEBUG    Poll [prompt in DOM] attempt 3: Page.evaluate: SyntaxError: Invalid or unexpected token
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:290:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[15:42:10] DEBUG    Poll [prompt in DOM] attempt 4: Page.evaluate: SyntaxError: Invalid or unexpected token
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:290:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[15:42:11] DEBUG    Poll [prompt in DOM] attempt 5: Page.evaluate: SyntaxError: Invalid or unexpected token
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:290:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[15:42:12] DEBUG    Poll [prompt in DOM] attempt 6: Page.evaluate: SyntaxError: Invalid or unexpected token
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:290:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[15:42:14] DEBUG    Poll [prompt in DOM] attempt 7: Page.evaluate: SyntaxError: Invalid or unexpected token
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:290:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[15:42:15] DEBUG    Poll [prompt in DOM] attempt 8: Page.evaluate: SyntaxError: Invalid or unexpected token
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:290:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[15:42:16] WARNING  ⚠️  STAGE 5 WARNING: Prompt not detected in DOM – continuing.
+[15:42:16] WARNING  ⚠️  STAGE 5 WARNING: Prompt not detected in DOM – continuing.
+[15:42:16] INFO     STAGE 6: Submitting generation request
+[15:42:16] INFO     STAGE 6: Submitting generation request
+[15:42:16] DEBUG    🕐 Human delay 1.0s before pressing Enter
+[15:42:24] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_after_submit.png
+[15:42:24] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_after_submit.png
+[15:42:24] INFO     ✅ STAGE 6 PASSED: Generation request submitted.
+[15:42:24] INFO     ✅ STAGE 6 PASSED: Generation request submitted.
+[15:42:24] INFO     ⏳ Waiting for generation to complete (looking for 'Make video' or video element) …
+[15:42:24] INFO     ⏳ Waiting for generation to complete (looking for 'Make video' or video element) …
+[15:42:24] INFO        ⏳ Still generating … 0s
+[15:42:24] INFO        ⏳ Still generating … 0s
+[15:42:30] INFO     ✅ 'Make video' button found after 6s — images generated.
+[15:42:30] INFO     ✅ 'Make video' button found after 6s — images generated.
+[15:42:30] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_images_done.png
+[15:42:30] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_images_done.png
+[15:42:30] INFO     STAGE 7: Clicking 'Make video' button
+[15:42:30] INFO     STAGE 7: Clicking 'Make video' button
+[15:42:30] DEBUG    🕐 Human delay 1.9s before clicking Make video
+[15:42:32] DEBUG    🖱️  Mouse jiggle → (619, 263)
+[15:42:33] INFO     🎬 Clicked 'Make video'!
+[15:42:33] INFO     🎬 Clicked 'Make video'!
+[15:42:39] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/07_make_video_clicked.png
+[15:42:39] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/07_make_video_clicked.png
+[15:42:39] INFO     ⏳ Waiting for video generation (up to 600s) …
+[15:42:39] INFO     ⏳ Waiting for video generation (up to 600s) …
+[15:43:33] ERROR    ❌ STAGE 7 FAILED: Page.evaluate: Target page, context or browser has been closed
+[15:43:33] ERROR    ❌ STAGE 7 FAILED: Page.evaluate: Target page, context or browser has been closed
+[15:43:33] WARNING  Screenshot '07_make_video_fail.png' failed: Page.screenshot: Target page, context or browser has been closed
+[15:43:33] WARNING  Screenshot '07_make_video_fail.png' failed: Page.screenshot: Target page, context or browser has been closed
+[15:43:33] ERROR    ❌ Generation failed: Make video failed: Page.evaluate: Target page, context or browser has been closed
+[15:43:33] ERROR    ❌ Generation failed: Make video failed: Page.evaluate: Target page, context or browser has been closed
+[15:43:33] INFO     
+=======================================================
+[15:43:33] INFO     
+=======================================================
+[15:43:33] INFO     📊 FINAL STAGE SUMMARY
+[15:43:33] INFO     📊 FINAL STAGE SUMMARY
+[15:43:33] INFO     =======================================================
+[15:43:33] INFO     =======================================================
+[15:43:33] INFO       ✅ LAUNCH          PASSED
+[15:43:33] INFO       ✅ LAUNCH          PASSED
+[15:43:33] INFO       ✅ NAVIGATE        PASSED
+[15:43:33] INFO       ✅ NAVIGATE        PASSED
+[15:43:33] INFO       ✅ VIDEO_MODE      PASSED
+[15:43:33] INFO       ✅ VIDEO_MODE      PASSED
+[15:43:33] INFO       ✅ UPLOAD          PASSED
+[15:43:33] INFO       ✅ UPLOAD          PASSED
+[15:43:33] INFO       ✅ PROMPT          PASSED
+[15:43:33] INFO       ✅ PROMPT          PASSED
+[15:43:33] INFO       ✅ SUBMIT          PASSED
+[15:43:33] INFO       ✅ SUBMIT          PASSED
+[15:43:33] INFO        Job End  : 2026-03-04T15:43:33.987388
+[15:43:33] INFO        Job End  : 2026-03-04T15:43:33.987388
+[15:43:33] INFO     =======================================================
+[15:43:33] INFO     =======================================================
+[15:43:33] ERROR    [90fdb1e2] FAILED: Make video failed: Page.evaluate: Target page, context or browser has been closed
+[15:43:33] ERROR    Failed to generate VIDEO for Module 1: Make video failed: Page.evaluate: Target page, context or browser has been closed
+[15:43:33] INFO     Generating VIDEO for Module 2
+[15:43:33] INFO     [0cb974b3] Queued: «{
+"shots":[
+{
+"shot_number":1,
+"duration":"5s",
+"description»
+[15:43:33] INFO     [0cb974b3] Starting …
+[15:43:33] INFO     =======================================================
+[15:43:33] INFO     =======================================================
+[15:43:33] INFO     🚀 Grok Video Generation Automation
+[15:43:33] INFO     🚀 Grok Video Generation Automation
+[15:43:33] INFO        Job Start: 2026-03-04T15:43:33.988473
+[15:43:33] INFO        Job Start: 2026-03-04T15:43:33.988473
+[15:43:33] INFO        Prompt   : {
+"shots":[
+{
+"shot_number":1,
+"duration":"5s",
+"description":"The studious Indian boy sits at his desk..."}
+]
+}
+[15:43:33] INFO        Prompt   : {
+"shots":[
+{
+"shot_number":1,
+"duration":"5s",
+"description":"The studious Indian boy sits at his desk..."}
+]
+}
+[15:43:33] INFO        Image    : /home/sonupandit/Documents/ai-vide-api/twitter-automation/default.png
+[15:43:33] INFO        Image    : /home/sonupandit/Documents/ai-vide-api/twitter-automation/default.png
+[15:43:33] INFO        Output   : /home/sonupandit/Documents/ai-vide-api/twitter-automation/video/module_2.mp4
+[15:43:33] INFO        Output   : /home/sonupandit/Documents/ai-vide-api/twitter-automation/video/module_2.mp4
+[15:43:33] INFO     =======================================================
+[15:43:33] INFO     =======================================================
+[15:43:34] INFO     STAGE 1: Launching Chrome
+[15:43:34] INFO     STAGE 1: Launching Chrome
+[15:43:34] INFO     ✅ STAGE 1 PASSED: Chrome launched.
+[15:43:34] INFO     ✅ STAGE 1 PASSED: Chrome launched.
+[15:43:34] INFO     STAGE 2: Navigating to Grok
+[15:43:34] INFO     STAGE 2: Navigating to Grok
+[15:43:37] WARNING  goto() non-fatal: Page.goto: Target page, context or browser has been closed
+Call log:
+  - navigating to "https://grok.com/imagine", waiting until "domcontentloaded"
+
+[15:43:37] WARNING  goto() non-fatal: Page.goto: Target page, context or browser has been closed
+Call log:
+  - navigating to "https://grok.com/imagine", waiting until "domcontentloaded"
+
+[15:43:37] INFO     ⏳ Waiting 8.1s for UI to settle …
+[15:43:37] INFO     ⏳ Waiting 8.1s for UI to settle …
+[15:43:45] ERROR    ❌ Generation failed: Page.wait_for_selector: Target page, context or browser has been closed
+[15:43:45] ERROR    ❌ Generation failed: Page.wait_for_selector: Target page, context or browser has been closed
+[15:43:45] INFO     
+=======================================================
+[15:43:45] INFO     
+=======================================================
+[15:43:45] INFO     📊 FINAL STAGE SUMMARY
+[15:43:45] INFO     📊 FINAL STAGE SUMMARY
+[15:43:45] INFO     =======================================================
+[15:43:45] INFO     =======================================================
+[15:43:45] INFO       ✅ LAUNCH          PASSED
+[15:43:45] INFO       ✅ LAUNCH          PASSED
+[15:43:45] INFO        Job End  : 2026-03-04T15:43:45.402697
+[15:43:45] INFO        Job End  : 2026-03-04T15:43:45.402697
+[15:43:45] INFO     =======================================================
+[15:43:45] INFO     =======================================================
+[15:43:45] ERROR    [0cb974b3] FAILED: Page.wait_for_selector: Target page, context or browser has been closed
+[15:43:45] ERROR    Failed to generate VIDEO for Module 2: Page.wait_for_selector: Target page, context or browser has been closed
+[15:43:45] INFO     Background processing complete for all modules.

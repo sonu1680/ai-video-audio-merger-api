@@ -76,6 +76,19 @@ app = FastAPI(
 class PromptBody(BaseModel):
     prompt: str
 
+from typing import List
+
+class ModulePayload(BaseModel):
+    module_number: int
+    video_generation_prompt: str
+
+class StoryPayload(BaseModel):
+    story_id: str
+    modules: List[ModulePayload]
+
+class TestPayload(BaseModel):
+    stories: List[StoryPayload]
+
 
 # ─────────────────────────── HELPERS ──────────────────────────────────────────
 
@@ -123,6 +136,35 @@ def _cleanup(path: str) -> None:
         log.warning(f"Cleanup failed for {path}: {e}")
 
 
+async def _process_payload_sequentially(payload: TestPayload):
+    for story in payload.stories:
+        # Sort modules by module_number to ensure strict sequential processing
+        modules = sorted(story.modules, key=lambda m: m.module_number)
+        
+        for module in modules:
+            prompt = module.video_generation_prompt
+            success = False
+            retries = 0
+            max_retries = 3
+            
+            while retries <= max_retries and not success:
+                log.info(f"[story_id: {story.story_id}] [module_number: {module.module_number}] video generation start (Attempt {retries + 1})")
+                try:
+                    video_path = await _run_generation(prompt)
+                    log.info(f"[story_id: {story.story_id}] [module_number: {module.module_number}] success (file: {video_path})")
+                    success = True
+                except Exception as e:
+                    log.error(f"[story_id: {story.story_id}] [module_number: {module.module_number}] failure: {e}")
+                    if retries < max_retries:
+                        log.info(f"[story_id: {story.story_id}] [module_number: {module.module_number}] retry attempt {retries + 1}")
+                        await asyncio.sleep(5)
+                    retries += 1
+                    
+            if not success:
+                log.error(f"[story_id: {story.story_id}] stopped processing story due to module {module.module_number} failure after {max_retries} retries")
+                break
+
+
 # ─────────────────────────── ROUTES ───────────────────────────────────────────
 
 @app.get("/health", summary="Health check + queue status")
@@ -168,6 +210,18 @@ async def post_video(body: PromptBody, background_tasks: BackgroundTasks):
     ```
     """
     return await _handle_generation(body.prompt, background_tasks)
+
+
+@app.post(
+    "/api/process_payload",
+    summary="Process a test payload sequentially",
+)
+async def process_test_payload(payload: TestPayload, background_tasks: BackgroundTasks):
+    """
+    Process a payload of stories with sequential video generation modules.
+    """
+    background_tasks.add_task(_process_payload_sequentially, payload)
+    return JSONResponse({"status": "processing", "message": "Payload processing started in the background."})
 
 
 async def _handle_generation(prompt: str, background_tasks: BackgroundTasks) -> FileResponse:

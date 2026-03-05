@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "title": "सोने की मुर्गी",
+    "duration": "25-30 seconds",
+    "modules": [
+      {
+        "module_number": 1,
+        "time": "0–10 sec",
+        "voiceover": "मेरा बेटा हर इम्तिहान में अव्वल आता था। मेरी सोने की मुर्गी। मैंने कहा, \"बेटा, तुम्हें हर रोज़ पढ़ना है, IIT से कम कुछ नहीं!\"",
+        "image_generation_prompt": "A proud middle-aged Indian mother in a simple saree stands behind her teenage son who is studying intently at a cluttered wooden desk, set in a modest 1990s Indian home, stacks of textbooks, dim tube light. The boy looks tired but focused. [character_image_url]",
+        "video_generation_prompt": "A slow zoom onto the tired but determined face of a teenage Indian boy studying late at night under a table lamp, books piled high around him, his mother's shadow looms in the background. [character_image_url]"
+      },
+      {
+        "module_number": 2,
+        "time": "10–20 sec",
+        "voiceover": "एक दिन उसने अपनी सारी किताबें बंद कीं... और बोला, \"माँ, अब मुझसे और नहीं होगा।\"",
+        "image_generation_prompt": "The same Indian teenage boy, his face etched with extreme stress and despair, pushes a stack of books away from him on his study table. The room is the same but feels suffocating. [character_image_url]",
+        "video_generation_prompt": "The boy's hands slam a thick textbook shut. The camera tilts up to his face, showing a look of finality and exhaustion, he looks directly at the camera breaking the fourth wall. [character_image_url]"
+      },
+      {
+        "module_number": 3,
+        "time": "20–30 sec",
+        "voiceover": "आज... उसके कमरे में खामोशी है... और मेरे हाथ में बस उसकी पुरानी मार्कशीटें।",
+        "image_generation_prompt": "The same room, now empty, covered in a thin layer of dust, sunlight streaming through the window. The mother, now looking older and filled with regret, sits on the floor, clutching his old, yellowed marksheets.",
+        "video_generation_prompt": "A close-up shot of the mother's trembling hands holding old, frayed marksheets. The camera slowly pulls back to reveal the tragically empty and silent room, her face filled with profound, silent grief."
+      }
+    ]
+  }
+]
