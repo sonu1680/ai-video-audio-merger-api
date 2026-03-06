@@ -23,7 +23,7 @@ from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel
 
 # Import our automation core
-from app import generate_video
+import app as grok_app
 
 # ─────────────────────────── CONFIG ───────────────────────────────────────────
 
@@ -120,7 +120,7 @@ async def _run_generation(prompt: str) -> str:
         loop = asyncio.get_event_loop()
         try:
             # generate_video is synchronous – run in thread pool
-            result = await loop.run_in_executor(None, generate_video, prompt, IMAGE_PATH, output_path)
+            result = await loop.run_in_executor(None, grok_app.generate_video, prompt, IMAGE_PATH, output_path)
             
             if result["status"] == "success":
                 _pending_jobs[job_id]["status"] = "done"
@@ -147,37 +147,92 @@ def _cleanup(path: str) -> None:
 async def _process_payload_sequentially(payload: Union[TestPayload, List[StoryPayload]]):
     stories = payload.stories if isinstance(payload, TestPayload) else payload
     
+    from playwright.sync_api import sync_playwright
+    from app import IMAGE_PATH, start_session, generate_single_video, close_session
+
     for story in stories:
         current_story_id = story.story_id if story.story_id is not None else story.id
         # Sort modules by module_number to ensure strict sequential processing
         modules = sorted(story.modules, key=lambda m: m.module_number)
         
-        for module in modules:
-            prompt = module.video_generation_prompt
-            if not isinstance(prompt, str):
-                import json
-                prompt = json.dumps(prompt, ensure_ascii=False)
-                
-            success = False
-            retries = 0
-            max_retries = 3
+        async with _chrome_lock:
+            # We hold the lock for the entire story so the browser session is isolated.
+            log.info(f"[story_id: {current_story_id}] 🚀 Starting browser session for sequential processing")
             
-            while retries <= max_retries and not success:
-                log.info(f"[story_id: {current_story_id}] [module_number: {module.module_number}] video generation start (Attempt {retries + 1})")
+            loop = asyncio.get_event_loop()
+            
+            # Start Playwright & Session
+            # Playwright must run in a thread, so we manage its context manually
+            def _init_session():
                 try:
-                    video_path = await _run_generation(prompt)
-                    log.info(f"[story_id: {current_story_id}] [module_number: {module.module_number}] success (file: {video_path})")
-                    success = True
+                    p = sync_playwright().start()
+                    session = start_session(IMAGE_PATH, p)
+                    session["p_context"] = p
+                    return session
                 except Exception as e:
-                    log.error(f"[story_id: {current_story_id}] [module_number: {module.module_number}] failure: {e}")
-                    if retries < max_retries:
-                        log.info(f"[story_id: {current_story_id}] [module_number: {module.module_number}] retry attempt {retries + 1}")
-                        await asyncio.sleep(5)
-                    retries += 1
+                    return {"status": "failure", "error": str(e)}
+
+            session = await loop.run_in_executor(None, _init_session)
+            
+            if session.get("status") != "success":
+                log.error(f"[story_id: {current_story_id}] ❌ Failed to start browser session: {session.get('error')}")
+                continue
+
+            browser = session["browser"]
+            page = session["page"]
+            session_log = session["log"]
+            p_context = session["p_context"]
+
+            try:
+                for module in modules:
+                    prompt = module.video_generation_prompt
+                    if not isinstance(prompt, str):
+                        import json
+                        prompt = json.dumps(prompt, ensure_ascii=False)
+                        
+                    # Target filename logic: module_X.mp4
+                    output_filename = f"module_{module.module_number}.mp4"
+                    output_path = str(VIDEOS_DIR / output_filename)
                     
-            if not success:
-                log.error(f"[story_id: {current_story_id}] stopped processing story due to module {module.module_number} failure after {max_retries} retries")
-                break
+                    success = False
+                    retries = 0
+                    max_retries = 3
+                    
+                    while retries <= max_retries and not success:
+                        log.info(f"[story_id: {current_story_id}] [module_number: {module.module_number}] 🎬 prompt submitted (Attempt {retries + 1})")
+                        
+                        try:
+                            # Run the generation block
+                            result = await loop.run_in_executor(
+                                None, 
+                                generate_single_video, 
+                                page, prompt, output_path, session_log
+                            )
+                            
+                            if result["status"] == "success":
+                                log.info(f"[story_id: {current_story_id}] [module_number: {module.module_number}] ✅ video generated and downloaded (file: {result['file_path']})")
+                                success = True
+                            else:
+                                raise RuntimeError(result["error"])
+                                
+                        except Exception as e:
+                            log.error(f"[story_id: {current_story_id}] [module_number: {module.module_number}] ❌ failure: {e}")
+                            if retries < max_retries:
+                                log.info(f"[story_id: {current_story_id}] [module_number: {module.module_number}] 🔄 retry attempt {retries + 1}")
+                                await asyncio.sleep(5)
+                            retries += 1
+                            
+                    if not success:
+                        log.error(f"[story_id: {current_story_id}] 🛑 stopped processing story due to module {module.module_number} failure after {max_retries} retries")
+                        break
+            finally:
+                # Always close the session after finishing modules
+                def _cleanup_session():
+                    close_session(browser, session_log)
+                    if p_context:
+                        p_context.stop()
+                await loop.run_in_executor(None, _cleanup_session)
+                log.info(f"[story_id: {current_story_id}] 👋 Browser session closed")
 
 
 # ─────────────────────────── ROUTES ───────────────────────────────────────────

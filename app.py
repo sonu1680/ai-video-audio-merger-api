@@ -634,31 +634,38 @@ def _stage_download(page, output_path: str, log) -> bool:
 
 # ─────────────────────────── PUBLIC API ───────────────────────────────────────
 
-def generate_video(prompt_text: str, image_path: str, output_path: str = None) -> dict:
+def start_session(image_path: str, p) -> dict:
     """
-    Run the full Grok automation pipeline.
-
-    Args:
-        prompt_text: The video generation prompt.
-        image_path: The user-provided image file.
-        output_path: Where to save the MP4. Defaults to ./videos/UNIQUE_NAME.mp4
-
-    Returns:
-        Local file path of the downloaded MP4, status, error message.
+    Start the Grok browser session, navigate, set video mode, and upload the image.
+    This session can be reused to generate multiple videos sequentially.
     """
-    start_time = datetime.now()
-    if output_path is None:
-        output_path = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "output.mp4"
-        )
+    if not os.path.exists(image_path):
+        raise ValueError(f"Image file not found: {image_path}")
 
     log = _make_logger(f"GrokBot_{os.getpid()}")
-
     log.info("=" * 55)
-    log.info("🚀 Grok Video Generation Automation")
-    log.info(f"   Job Start: {start_time.isoformat()}")
-    log.info(f"   Prompt   : {prompt_text}")
+    log.info("🚀 Grok Video Generation Automation - Starting Session")
     log.info(f"   Image    : {image_path}")
+    log.info("=" * 55)
+
+    try:
+        browser = _stage_launch(p, log)
+        page = _stage_navigate(browser, log)
+        _stage_video_mode(page, log)
+        _stage_upload_image(page, image_path, log)
+        
+        return {"browser": browser, "page": page, "log": log, "status": "success"}
+    except Exception as e:
+        log.error(f"❌ Session start failed: {e}")
+        return {"browser": None, "page": None, "log": log, "status": "failure", "error": str(e)}
+
+def generate_single_video(page, prompt_text: str, output_path: str, log) -> dict:
+    """
+    Generate a single video using an existing active Grok browser page session.
+    """
+    log.info("=" * 55)
+    log.info("🎬 Grok Video Generation - New Video")
+    log.info(f"   Prompt   : {prompt_text}")
     log.info(f"   Output   : {output_path}")
     log.info("=" * 55)
 
@@ -672,50 +679,63 @@ def generate_video(prompt_text: str, image_path: str, output_path: str = None) -
         log.error(f"❌ {err}")
         return {"file_path": None, "status": "failure", "error": err}
 
-    if not os.path.exists(image_path):
-        err = f"Image file not found: {image_path}"
-        log.error(f"❌ {err}")
-        return {"file_path": None, "status": "failure", "error": err}
+    try:
+        _stage_enter_prompt(page, prompt_text, log)
+        _stage_submit(page, log)
+        _stage_make_video(page, log)
+        _stage_download(page, output_path, log)
+        
+        # Verify file
+        if os.path.exists(output_path) and os.path.getsize(output_path) > 0:
+            log.info("🎉 SUCCESS!")
+            return {"file_path": output_path, "status": "success", "error": None}
+        else:
+            return {"file_path": None, "status": "failure", "error": "Download failed or empty file."}
+    except Exception as e:
+        log.error(f"❌ Generation failed: {e}")
+        return {"file_path": None, "status": "failure", "error": str(e)}
 
-    results = {}
-    error_msg = None
+def close_session(browser, log):
+    """
+    Close the persistent Grok browser session.
+    """
+    log.info("=" * 55)
+    log.info("👋 Closing Grok session")
+    log.info("=" * 55)
+    try:
+        if browser:
+            browser.close()
+    except Exception as e:
+        log.warning(f"Failed to close gracefully: {e}")
+
+def generate_video(prompt_text: str, image_path: str, output_path: str = None) -> dict:
+    """
+    Run the full Grok automation pipeline start-to-finish (for backwards compatibility).
+    """
+    start_time = datetime.now()
+    if output_path is None:
+        output_path = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "output.mp4"
+        )
+
+    log = _make_logger(f"GrokBot_{os.getpid()}")
 
     try:
         with sync_playwright() as p:
-            browser = _stage_launch(p, log)
-            results["launch"] = True
-
-            page = _stage_navigate(browser, log)
-            results["navigate"] = True
-
-            results["video_mode"] = _stage_video_mode(page, log)
-            results["upload"]     = _stage_upload_image(page, image_path, log)
-            results["prompt"]     = _stage_enter_prompt(page, prompt_text, log)
-            results["submit"]     = _stage_submit(page, log)
-            results["make_video"] = _stage_make_video(page, log)
-            results["download"]   = _stage_download(page, output_path, log)
-
-            browser.close()
+            session = start_session(image_path, p)
+            if session["status"] != "success":
+                return {"file_path": None, "status": "failure", "error": session.get("error")}
+                
+            browser = session["browser"]
+            page = session["page"]
+            
+            result = generate_single_video(page, prompt_text, output_path, log)
+            
+            close_session(browser, log)
+            return result
     except Exception as e:
-        error_msg = str(e)
-        log.error(f"❌ Generation failed: {error_msg}")
-
-    # Summary
-    completion_time = datetime.now()
-    log.info("\n" + "=" * 55)
-    log.info("📊 FINAL STAGE SUMMARY")
-    log.info("=" * 55)
-    for stage, passed in results.items():
-        icon = "✅" if passed else "❌"
-        log.info(f"  {icon} {stage.upper():15} {'PASSED' if passed else 'FAILED/SKIPPED'}")
-    log.info(f"   Job End  : {completion_time.isoformat()}")
-    log.info("=" * 55)
-
-    if error_msg is None and results.get("download"):
-        log.info("🎉 SUCCESS!")
-        return {"file_path": output_path, "status": "success", "error": None}
-    else:
-        return {"file_path": None, "status": "failure", "error": error_msg or "Unknown error"}
+        log.error(f"❌ Generation failed: {e}")
+        return {"file_path": None, "status": "failure", "error": str(e)}
 
 
 # ─────────────────────────── CLI ENTRYPOINT ───────────────────────────────────
