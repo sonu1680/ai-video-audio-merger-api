@@ -234,6 +234,134 @@ async def _process_payload_sequentially(payload: Union[TestPayload, List[StoryPa
                 await loop.run_in_executor(None, _cleanup_session)
                 log.info(f"[story_id: {current_story_id}] 👋 Browser session closed")
 
+                # Merge generated videos
+                import subprocess
+                concat_file = VIDEOS_DIR / f"concat_{current_story_id}.txt"
+                
+                bg_audio_path = BASE_DIR / "bg.mp3"
+                has_bg_audio = bg_audio_path.exists()
+                
+                merged_output = VIDEOS_DIR / (f"temp_story_{current_story_id}_merged.mp4" if has_bg_audio else "finalmergevideo.mp4")
+                
+                try:
+                    valid_videos = []
+                    for module in modules:
+                        output_path = VIDEOS_DIR / f"module_{module.module_number}.mp4"
+                        if output_path.exists():
+                            valid_videos.append(output_path)
+                    
+                    if valid_videos:
+                        with open(concat_file, "w") as f:
+                            for vp in valid_videos:
+                                f.write(f"file '{vp.absolute()}'\n")
+                                
+                        log.info(f"[story_id: {current_story_id}] 🎬 Merging {len(valid_videos)} videos into {merged_output.name}")
+                        cmd = [
+                            "ffmpeg", "-y", "-f", "concat", "-safe", "0", 
+                            "-i", str(concat_file.absolute()), 
+                            "-c", "copy", str(merged_output.absolute())
+                        ]
+                        
+                        def _run_ffmpeg():
+                            return subprocess.run(cmd, capture_output=True, text=True)
+                            
+                        process = await loop.run_in_executor(None, _run_ffmpeg)
+                        
+                        if process.returncode == 0:
+                            log.info(f"[story_id: {current_story_id}] ✅ Successfully merged videos to {merged_output}")
+                            
+                            final_video_path = merged_output
+                            
+                            # Add background audio if bg.mp3 exists
+                            if has_bg_audio:
+                                final_bg_output = VIDEOS_DIR / "finalmergevideo.mp4"
+                                log.info(f"[story_id: {current_story_id}] 🎵 Adding background audio to {final_bg_output.name}")
+                                bg_cmd = [
+                                    "ffmpeg", "-i", str(merged_output.absolute()), 
+                                    "-stream_loop", "-1", 
+                                    "-i", str(bg_audio_path.absolute()), 
+                                    "-filter_complex", "[1:a]volume=0.3[a1];[0:a][a1]amix=inputs=2:duration=first:dropout_transition=2[a]", 
+                                    "-map", "0:v", "-map", "[a]", 
+                                    "-c:v", "copy", "-y", str(final_bg_output.absolute())
+                                ]
+                                
+                                def _run_ffmpeg_bg():
+                                    return subprocess.run(bg_cmd, capture_output=True, text=True)
+                                    
+                                bg_process = await loop.run_in_executor(None, _run_ffmpeg_bg)
+                                
+                                if bg_process.returncode == 0:
+                                    log.info(f"[story_id: {current_story_id}] ✅ Successfully added background audio to {final_bg_output}")
+                                    final_video_path = final_bg_output
+                                    try:
+                                        merged_output.unlink()
+                                    except:
+                                        pass
+                                else:
+                                    log.error(f"[story_id: {current_story_id}] ❌ Failed to add background audio: {bg_process.stderr}")
+
+                            # Upload the final video to R2 Bucket
+                            try:
+                                import datetime
+                                from videoUploader import upload_video_to_r2
+                                
+                                # Setup a safe filename for the upload using current timestamp
+                                timestamp_str = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+                                bucket_filename = f"videos/video_{timestamp_str}.mp4"
+
+                                log.info(f"[story_id: {current_story_id}] ☁️ Uploading {final_video_path.name} to R2 bucket as {bucket_filename}...")
+                                
+                                def _run_upload():
+                                    return upload_video_to_r2(str(final_video_path.absolute()), bucket_filename)
+                                    
+                                upload_success = await loop.run_in_executor(None, _run_upload)
+                                if upload_success:
+                                    log.info(f"[story_id: {current_story_id}] ✅ Successfully uploaded {final_video_path.name} to R2 as {bucket_filename}")
+                                    
+                                    # Send webhook notification to n8n
+                                    try:
+                                        import requests
+                                        webhook_url = "https://n8n.sonupandit.in/webhook-test/7fdf6dcd-d193-4dc2-96fc-1b9420446a21"
+                                        
+                                        # Construct public URL Assuming the bucket is mapped to sonupandit.in
+                                        public_video_url = f"https://sonupandit.in/{bucket_filename}"
+                                        
+                                        payload = {
+                                            "story_id": current_story_id,
+                                            "video_url": public_video_url,
+                                            "timestamp": timestamp_str
+                                        }
+                                        log.info(f"[story_id: {current_story_id}] 📡 Sending webhook to {webhook_url}")
+                                        
+                                        def _send_webhook():
+                                            return requests.post(webhook_url, json=payload, timeout=10)
+                                            
+                                        webhook_resp = await loop.run_in_executor(None, _send_webhook)
+                                        if webhook_resp.status_code in (200, 201, 202):
+                                            log.info(f"[story_id: {current_story_id}] ✅ Webhook sent successfully")
+                                        else:
+                                            log.warning(f"[story_id: {current_story_id}] ⚠️ Webhook returned status {webhook_resp.status_code}: {webhook_resp.text}")
+                                    except Exception as we:
+                                        log.error(f"[story_id: {current_story_id}] ❌ Webhook notification failed: {we}")
+                                        
+                                else:
+                                    log.error(f"[story_id: {current_story_id}] ❌ R2 upload failed")
+                            except Exception as e:
+                                log.error(f"[story_id: {current_story_id}] ❌ Exception during R2 upload: {e}")
+                            
+                        else:
+                            log.error(f"[story_id: {current_story_id}] ❌ Failed to merge videos: {process.stderr}")
+                    else:
+                        log.warning(f"[story_id: {current_story_id}] ⚠️ No videos generated, skipping merge.")
+                except Exception as e:
+                    log.error(f"[story_id: {current_story_id}] ❌ Error during video merging: {e}")
+                finally:
+                    if concat_file.exists():
+                        try:
+                            concat_file.unlink()
+                        except:
+                            pass
+
 
 # ─────────────────────────── ROUTES ───────────────────────────────────────────
 

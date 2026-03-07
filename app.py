@@ -16,7 +16,7 @@ USER_DATA = os.path.expanduser("~/.config/google-chrome-bot-profile")
 PROFILE   = "Default"
 GROK_URL  = "https://grok.com/imagine"
 
-IMAGE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "default.png")
+IMAGE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "default.jpg")
 
 # Default prompt used when run directly from CLI
 DEFAULT_PROMPT = "man feeding the pigeon on building terrace"
@@ -674,8 +674,8 @@ def generate_single_video(page, prompt_text: str, output_path: str, log) -> dict
         log.error(f"❌ {err}")
         return {"file_path": None, "status": "failure", "error": err}
 
-    if len(prompt_text) > 2000:
-        err = "Prompt length exceeds 2000 characters"
+    if len(prompt_text) > 3000:
+        err = "Prompt length exceeds 3000 characters"
         log.error(f"❌ {err}")
         return {"file_path": None, "status": "failure", "error": err}
 
