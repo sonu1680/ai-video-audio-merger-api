@@ -147,8 +147,11 @@ def _cleanup(path: str) -> None:
 async def _process_payload_sequentially(payload: Union[TestPayload, List[StoryPayload]]):
     stories = payload.stories if isinstance(payload, TestPayload) else payload
     
-    from playwright.sync_api import sync_playwright
-    from app import IMAGE_PATH, start_session, generate_single_video, close_session
+    from modules.video_processor import generate_modules_sequentially
+    from modules.video_merger import merge_videos
+    from modules.video_uploader import upload_video_to_r2
+    from modules.webhook_sender import send_n8n_webhook
+    import datetime
 
     for story in stories:
         current_story_id = story.story_id if story.story_id is not None else story.id
@@ -157,210 +160,47 @@ async def _process_payload_sequentially(payload: Union[TestPayload, List[StoryPa
         
         async with _chrome_lock:
             # We hold the lock for the entire story so the browser session is isolated.
-            log.info(f"[story_id: {current_story_id}] 🚀 Starting browser session for sequential processing")
-            
             loop = asyncio.get_event_loop()
             
-            # Start Playwright & Session
-            # Playwright must run in a thread, so we manage its context manually
-            def _init_session():
-                try:
-                    p = sync_playwright().start()
-                    session = start_session(IMAGE_PATH, p)
-                    session["p_context"] = p
-                    return session
-                except Exception as e:
-                    return {"status": "failure", "error": str(e)}
-
-            session = await loop.run_in_executor(None, _init_session)
-            
-            if session.get("status") != "success":
-                log.error(f"[story_id: {current_story_id}] ❌ Failed to start browser session: {session.get('error')}")
-                continue
-
-            browser = session["browser"]
-            page = session["page"]
-            session_log = session["log"]
-            p_context = session["p_context"]
-
             try:
-                for module in modules:
-                    prompt = module.video_generation_prompt
-                    if not isinstance(prompt, str):
-                        import json
-                        prompt = json.dumps(prompt, ensure_ascii=False)
-                        
-                    # Target filename logic: module_X.mp4
-                    output_filename = f"module_{module.module_number}.mp4"
-                    output_path = str(VIDEOS_DIR / output_filename)
-                    
-                    success = False
-                    retries = 0
-                    max_retries = 3
-                    
-                    while retries <= max_retries and not success:
-                        log.info(f"[story_id: {current_story_id}] [module_number: {module.module_number}] 🎬 prompt submitted (Attempt {retries + 1})")
-                        
-                        try:
-                            # Run the generation block
-                            result = await loop.run_in_executor(
-                                None, 
-                                generate_single_video, 
-                                page, prompt, output_path, session_log
-                            )
-                            
-                            if result["status"] == "success":
-                                log.info(f"[story_id: {current_story_id}] [module_number: {module.module_number}] ✅ video generated and downloaded (file: {result['file_path']})")
-                                success = True
-                            else:
-                                raise RuntimeError(result["error"])
-                                
-                        except Exception as e:
-                            log.error(f"[story_id: {current_story_id}] [module_number: {module.module_number}] ❌ failure: {e}")
-                            if retries < max_retries:
-                                log.info(f"[story_id: {current_story_id}] [module_number: {module.module_number}] 🔄 retry attempt {retries + 1}")
-                                await asyncio.sleep(5)
-                            retries += 1
-                            
-                    if not success:
-                        log.error(f"[story_id: {current_story_id}] 🛑 stopped processing story due to module {module.module_number} failure after {max_retries} retries")
-                        break
-            finally:
-                # Always close the session after finishing modules
-                def _cleanup_session():
-                    close_session(browser, session_log)
-                    if p_context:
-                        p_context.stop()
-                await loop.run_in_executor(None, _cleanup_session)
-                log.info(f"[story_id: {current_story_id}] 👋 Browser session closed")
-
-                # Merge generated videos
-                import subprocess
-                concat_file = VIDEOS_DIR / f"concat_{current_story_id}.txt"
+                # 1. Generate Videos
+                def _run_generation_task():
+                    # We pass model dictionaries rather than Pydantic objects since sync playwright runs in another thread easily
+                    module_dicts = [m.dict() for m in modules]
+                    return generate_modules_sequentially(str(current_story_id), module_dicts)
                 
-                bg_audio_path = BASE_DIR / "bg.mp3"
-                has_bg_audio = bg_audio_path.exists()
+                generated_video_paths = await loop.run_in_executor(None, _run_generation_task)
                 
-                merged_output = VIDEOS_DIR / (f"temp_story_{current_story_id}_merged.mp4" if has_bg_audio else "finalmergevideo.mp4")
-                
-                try:
-                    valid_videos = []
-                    for module in modules:
-                        output_path = VIDEOS_DIR / f"module_{module.module_number}.mp4"
-                        if output_path.exists():
-                            valid_videos.append(output_path)
+                if not generated_video_paths:
+                    log.warning(f"[story_id: {current_story_id}] ⚠️ No videos generated, skipping merge.")
+                    continue
                     
-                    if valid_videos:
-                        with open(concat_file, "w") as f:
-                            for vp in valid_videos:
-                                f.write(f"file '{vp.absolute()}'\n")
-                                
-                        log.info(f"[story_id: {current_story_id}] 🎬 Merging {len(valid_videos)} videos into {merged_output.name}")
-                        cmd = [
-                            "ffmpeg", "-y", "-f", "concat", "-safe", "0", 
-                            "-i", str(concat_file.absolute()), 
-                            "-c", "copy", str(merged_output.absolute())
-                        ]
-                        
-                        def _run_ffmpeg():
-                            return subprocess.run(cmd, capture_output=True, text=True)
-                            
-                        process = await loop.run_in_executor(None, _run_ffmpeg)
-                        
-                        if process.returncode == 0:
-                            log.info(f"[story_id: {current_story_id}] ✅ Successfully merged videos to {merged_output}")
-                            
-                            final_video_path = merged_output
-                            
-                            # Add background audio if bg.mp3 exists
-                            if has_bg_audio:
-                                final_bg_output = VIDEOS_DIR / "finalmergevideo.mp4"
-                                log.info(f"[story_id: {current_story_id}] 🎵 Adding background audio to {final_bg_output.name}")
-                                bg_cmd = [
-                                    "ffmpeg", "-i", str(merged_output.absolute()), 
-                                    "-stream_loop", "-1", 
-                                    "-i", str(bg_audio_path.absolute()), 
-                                    "-filter_complex", "[1:a]volume=0.3[a1];[0:a][a1]amix=inputs=2:duration=first:dropout_transition=2[a]", 
-                                    "-map", "0:v", "-map", "[a]", 
-                                    "-c:v", "copy", "-y", str(final_bg_output.absolute())
-                                ]
-                                
-                                def _run_ffmpeg_bg():
-                                    return subprocess.run(bg_cmd, capture_output=True, text=True)
-                                    
-                                bg_process = await loop.run_in_executor(None, _run_ffmpeg_bg)
-                                
-                                if bg_process.returncode == 0:
-                                    log.info(f"[story_id: {current_story_id}] ✅ Successfully added background audio to {final_bg_output}")
-                                    final_video_path = final_bg_output
-                                    try:
-                                        merged_output.unlink()
-                                    except:
-                                        pass
-                                else:
-                                    log.error(f"[story_id: {current_story_id}] ❌ Failed to add background audio: {bg_process.stderr}")
-
-                            # Upload the final video to R2 Bucket
-                            try:
-                                import datetime
-                                from videoUploader import upload_video_to_r2
-                                
-                                # Setup a safe filename for the upload using current timestamp
-                                timestamp_str = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-                                bucket_filename = f"videos/video_{timestamp_str}.mp4"
-
-                                log.info(f"[story_id: {current_story_id}] ☁️ Uploading {final_video_path.name} to R2 bucket as {bucket_filename}...")
-                                
-                                def _run_upload():
-                                    return upload_video_to_r2(str(final_video_path.absolute()), bucket_filename)
-                                    
-                                upload_success = await loop.run_in_executor(None, _run_upload)
-                                if upload_success:
-                                    log.info(f"[story_id: {current_story_id}] ✅ Successfully uploaded {final_video_path.name} to R2 as {bucket_filename}")
-                                    
-                                    # Send webhook notification to n8n
-                                    try:
-                                        import requests
-                                        webhook_url = "https://n8n.sonupandit.in/webhook-test/7fdf6dcd-d193-4dc2-96fc-1b9420446a21"
-                                        
-                                        # Construct public URL Assuming the bucket is mapped to sonupandit.in
-                                        public_video_url = f"https://sonupandit.in/{bucket_filename}"
-                                        
-                                        payload = {
-                                            "story_id": current_story_id,
-                                            "video_url": public_video_url,
-                                            "timestamp": timestamp_str
-                                        }
-                                        log.info(f"[story_id: {current_story_id}] 📡 Sending webhook to {webhook_url}")
-                                        
-                                        def _send_webhook():
-                                            return requests.post(webhook_url, json=payload, timeout=10)
-                                            
-                                        webhook_resp = await loop.run_in_executor(None, _send_webhook)
-                                        if webhook_resp.status_code in (200, 201, 202):
-                                            log.info(f"[story_id: {current_story_id}] ✅ Webhook sent successfully")
-                                        else:
-                                            log.warning(f"[story_id: {current_story_id}] ⚠️ Webhook returned status {webhook_resp.status_code}: {webhook_resp.text}")
-                                    except Exception as we:
-                                        log.error(f"[story_id: {current_story_id}] ❌ Webhook notification failed: {we}")
-                                        
-                                else:
-                                    log.error(f"[story_id: {current_story_id}] ❌ R2 upload failed")
-                            except Exception as e:
-                                log.error(f"[story_id: {current_story_id}] ❌ Exception during R2 upload: {e}")
-                            
-                        else:
-                            log.error(f"[story_id: {current_story_id}] ❌ Failed to merge videos: {process.stderr}")
-                    else:
-                        log.warning(f"[story_id: {current_story_id}] ⚠️ No videos generated, skipping merge.")
-                except Exception as e:
-                    log.error(f"[story_id: {current_story_id}] ❌ Error during video merging: {e}")
-                finally:
-                    if concat_file.exists():
-                        try:
-                            concat_file.unlink()
-                        except:
-                            pass
+                # 2. Merge Videos
+                def _run_merge_task():
+                    return merge_videos(str(current_story_id), generated_video_paths)
+                    
+                final_video_path = await loop.run_in_executor(None, _run_merge_task)
+                
+                # 3. Upload to R2
+                timestamp_str = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+                bucket_filename = f"videos/video_{timestamp_str}.mp4"
+                
+                log.info(f"[story_id: {current_story_id}] ☁️ Uploading {final_video_path.name} to R2 bucket as {bucket_filename}...")
+                
+                def _run_upload_task():
+                     return upload_video_to_r2(str(final_video_path.absolute()), bucket_filename)
+                     
+                upload_success = await loop.run_in_executor(None, _run_upload_task)
+                
+                if upload_success:
+                    # 4. Send Webhook
+                    def _run_webhook_task():
+                        return send_n8n_webhook(str(current_story_id), bucket_filename, timestamp_str)
+                    
+                    await loop.run_in_executor(None, _run_webhook_task)
+                    
+            except Exception as e:
+                log.error(f"[story_id: {current_story_id}] ❌ Sequence failed: {e}")
 
 
 # ─────────────────────────── ROUTES ───────────────────────────────────────────
@@ -460,3 +300,53 @@ async def _handle_generation(prompt: str, background_tasks: BackgroundTasks) -> 
 
 # source venv/bin/activate
     #uvicorn server:app --host 0.0.0.0 --port 8000 --reload
+
+# ─────────────────────────── DEBUG ENDPOINTS ──────────────────────────────────
+
+class WebhookTestPayload(BaseModel):
+    story_id: str
+    bucket_filename: str
+    timestamp_str: str
+
+@app.post("/api/test_webhook", summary="Test the n8n webhook module independently")
+async def test_webhook(payload: WebhookTestPayload, background_tasks: BackgroundTasks):
+    from modules.webhook_sender import send_n8n_webhook
+    def _run_test():
+        send_n8n_webhook(payload.story_id, payload.bucket_filename, payload.timestamp_str)
+    background_tasks.add_task(_run_test)
+    return JSONResponse({"status": "queued", "message": "Webhook test triggered."})
+
+class UploadTestPayload(BaseModel):
+    file_path: str
+    bucket_filename: Optional[str] = None
+
+@app.post("/api/test_upload", summary="Test the R2 upload module independently")
+async def test_upload(payload: UploadTestPayload, background_tasks: BackgroundTasks):
+    from modules.video_uploader import upload_video_to_r2
+    def _run_test():
+        upload_video_to_r2(payload.file_path, payload.bucket_filename)
+    background_tasks.add_task(_run_test)
+    return JSONResponse({"status": "queued", "message": "Upload test triggered."})
+
+class MergeTestPayload(BaseModel):
+    story_id: str
+    video_filenames: List[str]
+
+@app.post("/api/test_merge", summary="Test the video merging module independently")
+async def test_merge(payload: MergeTestPayload, background_tasks: BackgroundTasks):
+    from modules.video_merger import merge_videos
+    from pathlib import Path
+    
+    def _run_test():
+        try:
+            paths = [VIDEOS_DIR / f for f in payload.video_filenames]
+            for p in paths:
+                if not p.exists():
+                    log.error(f"Missing file: {p}")
+                    return
+            merge_videos(payload.story_id, paths)
+        except Exception as e:
+            log.error(f"Test merge error: {e}")
+            
+    background_tasks.add_task(_run_test)
+    return JSONResponse({"status": "queued", "message": "Merge test triggered."})
