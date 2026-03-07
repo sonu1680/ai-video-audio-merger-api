@@ -195,7 +195,12 @@ async def _process_payload_sequentially(payload: Union[TestPayload, List[StoryPa
                 if upload_success:
                     # 4. Send Webhook
                     def _run_webhook_task():
-                        return send_n8n_webhook(str(current_story_id), bucket_filename, timestamp_str)
+                        return send_n8n_webhook(
+                            str(current_story_id), 
+                            bucket_filename, 
+                            timestamp_str, 
+                            source_video_path=str(final_video_path.absolute())
+                        )
                     
                     await loop.run_in_executor(None, _run_webhook_task)
                     
@@ -307,12 +312,18 @@ class WebhookTestPayload(BaseModel):
     story_id: str
     bucket_filename: str
     timestamp_str: str
+    source_video_path: Optional[str] = None
 
 @app.post("/api/test_webhook", summary="Test the n8n webhook module independently")
 async def test_webhook(payload: WebhookTestPayload, background_tasks: BackgroundTasks):
     from modules.webhook_sender import send_n8n_webhook
     def _run_test():
-        send_n8n_webhook(payload.story_id, payload.bucket_filename, payload.timestamp_str)
+        send_n8n_webhook(
+            payload.story_id, 
+            payload.bucket_filename, 
+            payload.timestamp_str,
+            source_video_path=payload.source_video_path
+        )
     background_tasks.add_task(_run_test)
     return JSONResponse({"status": "queued", "message": "Webhook test triggered."})
 
