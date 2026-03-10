@@ -39,10 +39,12 @@ def generate_modules_sequentially(story_id: str, modules: List[dict]) -> List[Pa
         for module in modules:
             # We assume dict because BaseModel was passed in from API layer
             module_number = module.get("module_number")
-            prompt = module.get("video_generation_prompt")
+            video_prompt = module.get("video_generation_prompt")
             
-            if not isinstance(prompt, str):
-                prompt = json.dumps(prompt, ensure_ascii=False)
+            if not isinstance(video_prompt, str):
+                video_prompt_str = json.dumps(video_prompt, ensure_ascii=False, indent=2)
+            else:
+                video_prompt_str = video_prompt
                 
             output_filename = f"module_{module_number}.mp4"
             output_path = str(VIDEOS_DIR / output_filename)
@@ -56,7 +58,7 @@ def generate_modules_sequentially(story_id: str, modules: List[dict]) -> List[Pa
                 
                 try:
                     # generate_single_video is synchronous
-                    result = grok_app.generate_single_video(page, prompt, output_path, session_log)
+                    result = grok_app.generate_single_video(page, video_prompt_str, output_path, session_log)
                     
                     if result.get("status") == "success":
                         log.info(f"[story_id: {story_id}] [module_number: {module_number}] ✅ video generated (file: {result['file_path']})")

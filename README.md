@@ -9,9 +9,7 @@ A highly modular FastAPI backend for generating, merging, uploading, and notifyi
 3. **Configuration:** All sensitive keys (R2 Buckets) and URLs (n8n webhooks) are located in `config.py`. Update them there before running.
 4. **Execution:** 
    ```bash
-   uvicorn server:app --host 0.0.0.0 --port 8000 --reload
    ```
-
 ## Core Endpoints
 
 ### 1. Health & Queue check
@@ -90,17 +88,29 @@ Attempts to upload a local file to Cloudflare.
 ```
 *(Note: `bucket_filename` is optional. If omitted, it will use the default path format)*
 
-### 3. Test FFMPEG Video Merge
+### 3. Test FFMPEG Chunk Merging
 `POST /api/test_merge`
-Attempts to concatenate a list of filenames found in the `videos` directory. Also automatically layers `bg.mp3` from the root directory over it if found.
+Attempts to concatenate a list of chunk filenames found in the `videos` directory to test the FFMPEG concat stitcher.
 
 **Payload:**
 ```json
 {
   "story_id": "debug_123",
   "video_filenames": [
-    "module_1.mp4",
-    "module_2.mp4"
+    "chunk_1_story_123.mp4",
+    "chunk_2_story_123.mp4"
   ]
+}
+```
+
+### 4. Test Background Audio Layering
+`POST /api/test_audio_layer`
+Attempts to apply `bg.mp3` from the root directory over the specified video file found in the `videos` directory.
+
+**Payload:**
+```json
+{
+  "story_id": "debug_123",
+  "video_filename": "module_1.mp4"
 }
 ```
