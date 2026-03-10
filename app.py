@@ -28,8 +28,8 @@ IMAGE_UPLOAD_WAIT         = 60
 IMAGE_UPLOAD_VERIFY_TRIES = 20
 PROMPT_VERIFY_TRIES       = 8
 GENERATION_POLL_INTERVAL  = 3
-GENERATION_MAX_WAIT       = 600      # max wait for image generation
-VIDEO_GEN_MAX_WAIT        = 600      # max wait for video generation
+GENERATION_MAX_WAIT       = 300      # max wait for image generation
+VIDEO_GEN_MAX_WAIT        = 300      # max wait for video generation
 DOWNLOAD_TIMEOUT_MS       = 90_000
 
 
@@ -639,7 +639,7 @@ def start_session(image_path: str, p) -> dict:
     Start the Grok browser session, navigate, set video mode, and upload the image.
     This session can be reused to generate multiple videos sequentially.
     """
-    if not os.path.exists(image_path):
+    if image_path is not None and not os.path.exists(image_path):
         raise ValueError(f"Image file not found: {image_path}")
 
     log = _make_logger(f"GrokBot_{os.getpid()}")
@@ -651,8 +651,9 @@ def start_session(image_path: str, p) -> dict:
     try:
         browser = _stage_launch(p, log)
         page = _stage_navigate(browser, log)
-        _stage_video_mode(page, log)
-        _stage_upload_image(page, image_path, log)
+        if image_path:
+            _stage_video_mode(page, log)
+            _stage_upload_image(page, image_path, log)
         
         return {"browser": browser, "page": page, "log": log, "status": "success"}
     except Exception as e:

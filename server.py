@@ -82,6 +82,7 @@ import json
 class ModulePayload(BaseModel):
     module_number: int
     video_generation_prompt: Any
+    voiceover: Optional[str] = None
 
     class Config:
         extra = "allow"
@@ -151,6 +152,7 @@ async def _process_payload_sequentially(payload: Union[TestPayload, List[StoryPa
     from modules.video_merger import merge_videos
     from modules.video_uploader import upload_video_to_r2
     from modules.webhook_sender import send_n8n_webhook
+    from modules.voiceover import generate_speech
     import datetime
 
     for story in stories:
@@ -175,9 +177,31 @@ async def _process_payload_sequentially(payload: Union[TestPayload, List[StoryPa
                     log.warning(f"[story_id: {current_story_id}] ⚠️ No videos generated, skipping merge.")
                     continue
                     
+                # 1.5 Generate Voiceover
+                full_voiceover_text = " ".join([m.voiceover.strip() for m in modules if m.voiceover and m.voiceover.strip()])
+                voiceover_path = None
+                
+                if full_voiceover_text:
+                    log.info(f"[story_id: {current_story_id}] 🎙️ Generating voiceover track for {len(modules)} modules")
+                    vo_filename = VIDEOS_DIR / f"voiceover_{current_story_id}.wav"
+                    
+                    def _run_voiceover_task():
+                        generate_speech(
+                            prompt=full_voiceover_text,
+                            output_filename=str(vo_filename)
+                        )
+                        return vo_filename
+                        
+                    try:
+                        voiceover_path = await loop.run_in_executor(None, _run_voiceover_task)
+                        log.info(f"[story_id: {current_story_id}] ✅ Voiceover saved to {voiceover_path}")
+                    except Exception as ve:
+                        log.error(f"[story_id: {current_story_id}] ❌ Voiceover generation failed: {ve}")
+                        # We continue even if voiceover fails to at least give the video
+                
                 # 2. Merge Videos
                 def _run_merge_task():
-                    return merge_videos(str(current_story_id), generated_video_paths)
+                    return merge_videos(str(current_story_id), generated_video_paths, voiceover_path)
                     
                 final_video_path = await loop.run_in_executor(None, _run_merge_task)
                 

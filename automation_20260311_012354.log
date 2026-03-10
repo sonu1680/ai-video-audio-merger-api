@@ -1,0 +1,375 @@
+[01:23:54] INFO     📋 Full debug log → automation_20260311_012354.log
+[01:23:54] INFO     =======================================================
+[01:23:54] INFO     🚀 Grok Video Generation Automation - Starting Session
+[01:23:54] INFO        Image    : None
+[01:23:54] INFO     =======================================================
+[01:23:54] INFO     STAGE 1: Launching Chrome
+[01:23:54] INFO     ✅ STAGE 1 PASSED: Chrome launched.
+[01:23:54] INFO     STAGE 2: Navigating to Grok
+[01:23:56] INFO     ⏳ Waiting 7.3s for UI to settle …
+[01:24:03] DEBUG    🖱️  Scroll up 105px
+[01:24:03] DEBUG    🖱️  Mouse jiggle → (342, 160)
+[01:24:04] INFO     ✅ STAGE 2 PASSED: Page loaded.
+[01:24:04] DEBUG    🕐 Human delay 3.0s post-navigation
+[01:24:07] INFO     STAGE 3: Ensuring Video mode is selected
+[01:24:07] DEBUG    🕐 Human delay 1.3s before checking mode
+[01:24:08] WARNING  ⚠️  Settings button not found — trying to continue anyway.
+[01:24:09] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/03_no_settings_btn.png
+[01:24:09] INFO     =======================================================
+[01:24:09] INFO     🎬 Grok Video Generation - New Video
+[01:24:09] INFO        Prompt   : IMAGE CONTEXT:
+early 1900s laboratory interior with Nikola Tesla inspired inventor beside primitive electrical equipment and coils, sepia vintage film look heavy grain scratches
+
+VIDEO INSTRUCTIONS:
+Environment: An early 1900s electrical laboratory filled with wooden tables, primitive electrical coils, wires, glass bulbs and scientific instruments. The room is dimly lit with a sepia black and white vintage documentary aesthetic, heavy film grain, scratches, dust particles and slight flickering exposure. Character: Nikola Tesla inspired inventor wearing a dark early twentieth century suit, vest, white shirt and tie with neatly combed hair. Objects: Electrical coils and glowing experimental equipment placed on a wooden table. Movement: Over 10 seconds Tesla slowly turns toward the camera, speaking thoughtfully while faint sparks flicker behind him as the camera performs a subtle cinematic push-in.
+[01:24:09] INFO        Output   : /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_1.mp4
+[01:24:09] INFO     =======================================================
+[01:24:09] INFO     STAGE 5: Entering prompt
+[01:24:09] INFO     📝 «IMAGE CONTEXT:
+early 1900s laboratory interior with Nikola Tesla inspired inventor beside primitive electrical equipment and coils, sepia vintage film look heavy grain scratches
+
+VIDEO INSTRUCTIONS:
+Environment: An early 1900s electrical laboratory filled with wooden tables, primitive electrical coils, wires, glass bulbs and scientific instruments. The room is dimly lit with a sepia black and white vintage documentary aesthetic, heavy film grain, scratches, dust particles and slight flickering exposure. Character: Nikola Tesla inspired inventor wearing a dark early twentieth century suit, vest, white shirt and tie with neatly combed hair. Objects: Electrical coils and glowing experimental equipment placed on a wooden table. Movement: Over 10 seconds Tesla slowly turns toward the camera, speaking thoughtfully while faint sparks flicker behind him as the camera performs a subtle cinematic push-in.»
+[01:24:09] DEBUG    🖱️  Scroll down 95px
+[01:24:09] DEBUG    🕐 Human delay 1.0s before typing prompt
+[01:24:10] DEBUG    🖱️  Mouse jiggle → (249, 461)
+[01:24:16] DEBUG    Strategy 'textarea' failed: Locator.wait_for: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("textarea").first
+
+[01:24:17] INFO     ✏️  Entered via ProseMirror.
+[01:24:18] DEBUG    ✅ 'prompt in DOM' met on attempt 1/8
+[01:24:18] INFO     ✅ STAGE 5 PASSED: Prompt confirmed in DOM.
+[01:24:18] INFO     STAGE 6: Submitting generation request
+[01:24:18] DEBUG    🕐 Human delay 0.7s before pressing Enter
+[01:24:25] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_after_submit.png
+[01:24:25] INFO     ✅ STAGE 6 PASSED: Generation request submitted.
+[01:24:25] INFO     ⏳ Waiting for generation to complete (looking for 'Make video' or video element) …
+[01:24:25] INFO        ⏳ Still generating … 0s
+[01:24:40] INFO        ⏳ Still generating … 15s
+[01:24:55] INFO        ⏳ Still generating … 30s
+[01:25:10] INFO        ⏳ Still generating … 45s
+[01:25:25] INFO        ⏳ Still generating … 60s
+[01:25:41] INFO        ⏳ Still generating … 75s
+[01:25:56] INFO     ✅ Video element found after 90s — video generated directly.
+[01:25:56] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_video_direct.png
+[01:25:56] INFO     STAGE 7: Clicking 'Make video' button
+[01:25:56] WARNING  ⚠️  'Make video' button not visible — maybe video was generated directly.
+[01:25:56] INFO     STAGE 8: Downloading generated video
+[01:25:56] INFO        Trying Strategy 1: Extract video src URL …
+[01:25:56] INFO     🔗 Video URL found: https://assets.grok.com/users/8dbf2400-2043-4217-8f1b-f55601499675/generated/9cde5c81-ad2c-4f39-aafa-2296060b1a0a/genera…
+[01:25:56] INFO     ⬇️  Downloading video to /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_1.mp4 …
+[01:25:56] WARNING  ⚠️  Direct download failed: HTTP Error 403: Forbidden — trying Strategy 2.
+[01:25:56] INFO        Trying Strategy 2: Click download button …
+[01:25:56] INFO        Found download element: button[aria-label*="ownload"]
+[01:25:56] INFO     ⬇️  Attempt 1/3 …
+[01:25:58] INFO     ✅ STAGE 8 PASSED (Strategy 2): /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_1.mp4 (2.99 MB)
+[01:25:59] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/08_download_success.png
+[01:25:59] INFO     🎉 SUCCESS!
+[01:25:59] INFO     STAGE 3: Ensuring Video mode is selected
+[01:25:59] DEBUG    🕐 Human delay 0.6s before checking mode
+[01:26:00] INFO        Current mode button text: ''
+[01:26:00] INFO        Switching to Video mode …
+[01:26:02] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/03_settings_dropdown.png
+[01:26:32] WARNING  ⚠️  STAGE 3 WARNING: Video option not found in dropdown.
+[01:26:32] INFO     STAGE 4: Uploading image
+[01:26:32] INFO     🖼️  Image: /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_2_start_frame.jpg (0.09 MB)
+[01:26:32] INFO     📤 File set on input.
+[01:26:32] DEBUG    🕐 Human delay 2.8s after file select
+[01:26:35] DEBUG    ✅ 'upload visible' met on attempt 1/20
+[01:26:35] INFO     ✅ STAGE 4 PASSED: Image visible in UI.
+[01:26:35] INFO     ⏳ Waiting 60s for Grok to process image …
+[01:26:45] INFO        … 50s remaining
+[01:26:55] INFO        … 40s remaining
+[01:27:05] INFO        … 30s remaining
+[01:27:15] INFO        … 20s remaining
+[01:27:25] INFO        … 10s remaining
+[01:27:35] INFO     =======================================================
+[01:27:35] INFO     🎬 Grok Video Generation - New Video
+[01:27:35] INFO        Prompt   : Environment: The same early twentieth century laboratory with wooden tables, scattered scientific instruments and dim warm lighting creating a vintage documentary atmosphere with sepia tones, film grain and dust particles. Character: Tesla wearing the same formal dark suit and vest, appearing focused and curious. Objects: Several sheets of paper containing hand drawn electrical towers, energy waves and experimental sketches spread across a wooden work table. Movement: In the 10 second scene Tesla gently spreads the diagrams and points toward the drawings while explaining his idea. The camera slowly moves closer to the table revealing the sketches as subtle electrical humming fills the background.
+[01:27:35] INFO        Output   : /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_2.mp4
+[01:27:35] INFO     =======================================================
+[01:27:35] INFO     STAGE 5: Entering prompt
+[01:27:35] INFO     📝 «Environment: The same early twentieth century laboratory with wooden tables, scattered scientific instruments and dim warm lighting creating a vintage documentary atmosphere with sepia tones, film grain and dust particles. Character: Tesla wearing the same formal dark suit and vest, appearing focused and curious. Objects: Several sheets of paper containing hand drawn electrical towers, energy waves and experimental sketches spread across a wooden work table. Movement: In the 10 second scene Tesla gently spreads the diagrams and points toward the drawings while explaining his idea. The camera slowly moves closer to the table revealing the sketches as subtle electrical humming fills the background.»
+[01:27:35] DEBUG    🖱️  Scroll down 231px
+[01:27:35] DEBUG    🕐 Human delay 1.9s before typing prompt
+[01:27:37] DEBUG    🖱️  Mouse jiggle → (653, 492)
+[01:27:43] DEBUG    Strategy 'textarea' failed: Locator.wait_for: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("textarea").first
+
+[01:27:44] INFO     ✏️  Entered via ProseMirror.
+[01:27:45] DEBUG    ✅ 'prompt in DOM' met on attempt 1/8
+[01:27:45] INFO     ✅ STAGE 5 PASSED: Prompt confirmed in DOM.
+[01:27:45] INFO     STAGE 6: Submitting generation request
+[01:27:45] DEBUG    🕐 Human delay 1.1s before pressing Enter
+[01:27:53] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_after_submit.png
+[01:27:53] INFO     ✅ STAGE 6 PASSED: Generation request submitted.
+[01:27:53] INFO     ⏳ Waiting for generation to complete (looking for 'Make video' or video element) …
+[01:27:53] INFO        ⏳ Still generating … 0s
+[01:28:08] INFO        ⏳ Still generating … 15s
+[01:28:23] INFO        ⏳ Still generating … 30s
+[01:28:38] INFO        ⏳ Still generating … 45s
+[01:28:53] INFO        ⏳ Still generating … 60s
+[01:29:08] INFO        ⏳ Still generating … 75s
+[01:29:23] INFO        ⏳ Still generating … 90s
+[01:29:38] INFO        ⏳ Still generating … 105s
+[01:29:50] INFO     ✅ Video element found after 117s — video generated directly.
+[01:29:51] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_video_direct.png
+[01:29:51] INFO     STAGE 7: Clicking 'Make video' button
+[01:29:51] WARNING  ⚠️  'Make video' button not visible — maybe video was generated directly.
+[01:29:51] INFO     STAGE 8: Downloading generated video
+[01:29:51] INFO        Trying Strategy 1: Extract video src URL …
+[01:29:51] INFO     🔗 Video URL found: https://assets.grok.com/users/8dbf2400-2043-4217-8f1b-f55601499675/generated/171d2adf-2f0b-42fe-9a60-77f887ddb30c/genera…
+[01:29:51] INFO     ⬇️  Downloading video to /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_2.mp4 …
+[01:29:51] WARNING  ⚠️  Direct download failed: HTTP Error 403: Forbidden — trying Strategy 2.
+[01:29:51] INFO        Trying Strategy 2: Click download button …
+[01:29:51] INFO        Found download element: button[aria-label*="ownload"]
+[01:29:51] INFO     ⬇️  Attempt 1/3 …
+[01:29:52] INFO     ✅ STAGE 8 PASSED (Strategy 2): /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_2.mp4 (2.05 MB)
+[01:29:52] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/08_download_success.png
+[01:29:52] INFO     🎉 SUCCESS!
+[01:29:53] INFO     STAGE 3: Ensuring Video mode is selected
+[01:29:53] DEBUG    🕐 Human delay 0.7s before checking mode
+[01:29:53] INFO        Current mode button text: ''
+[01:29:53] INFO        Switching to Video mode …
+[01:29:56] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/03_settings_dropdown.png
+[01:30:26] WARNING  ⚠️  STAGE 3 WARNING: Video option not found in dropdown.
+[01:30:26] INFO     STAGE 4: Uploading image
+[01:30:26] INFO     🖼️  Image: /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_3_start_frame.jpg (0.08 MB)
+[01:30:26] INFO     📤 File set on input.
+[01:30:26] DEBUG    🕐 Human delay 1.4s after file select
+[01:30:27] DEBUG    ✅ 'upload visible' met on attempt 1/20
+[01:30:27] INFO     ✅ STAGE 4 PASSED: Image visible in UI.
+[01:30:27] INFO     ⏳ Waiting 60s for Grok to process image …
+[01:30:37] INFO        … 50s remaining
+[01:30:47] INFO        … 40s remaining
+[01:30:57] INFO        … 30s remaining
+[01:31:07] INFO        … 20s remaining
+[01:31:17] INFO        … 10s remaining
+[01:31:27] INFO     =======================================================
+[01:31:27] INFO     🎬 Grok Video Generation - New Video
+[01:31:27] INFO        Prompt   : Environment: A darker area of the laboratory where a large experimental electrical coil machine dominates the room. Dramatic shadows and faint electrical glow create a mysterious scientific atmosphere with sepia vintage film style, scratches and grain. Character: Tesla wearing his classic early twentieth century suit and vest, standing confidently beside the machine. Objects: A massive electrical coil device with metal rings, wires and glowing components. Movement: Over 10 seconds Tesla gestures toward the machine while explaining his theory and then gently places his hand on the coil apparatus. Small electrical sparks flicker as the camera slowly pushes in emphasizing the scale of the machine.
+[01:31:27] INFO        Output   : /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_3.mp4
+[01:31:27] INFO     =======================================================
+[01:31:27] INFO     STAGE 5: Entering prompt
+[01:31:27] INFO     📝 «Environment: A darker area of the laboratory where a large experimental electrical coil machine dominates the room. Dramatic shadows and faint electrical glow create a mysterious scientific atmosphere with sepia vintage film style, scratches and grain. Character: Tesla wearing his classic early twentieth century suit and vest, standing confidently beside the machine. Objects: A massive electrical coil device with metal rings, wires and glowing components. Movement: Over 10 seconds Tesla gestures toward the machine while explaining his theory and then gently places his hand on the coil apparatus. Small electrical sparks flicker as the camera slowly pushes in emphasizing the scale of the machine.»
+[01:31:27] DEBUG    🖱️  Scroll down 181px
+[01:31:28] DEBUG    🕐 Human delay 1.9s before typing prompt
+[01:31:30] DEBUG    🖱️  Mouse jiggle → (712, 543)
+[01:31:35] DEBUG    Strategy 'textarea' failed: Locator.wait_for: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("textarea").first
+
+[01:31:36] INFO     ✏️  Entered via ProseMirror.
+[01:31:37] DEBUG    ✅ 'prompt in DOM' met on attempt 1/8
+[01:31:37] INFO     ✅ STAGE 5 PASSED: Prompt confirmed in DOM.
+[01:31:37] INFO     STAGE 6: Submitting generation request
+[01:31:37] DEBUG    🕐 Human delay 1.0s before pressing Enter
+[01:31:43] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_after_submit.png
+[01:31:43] INFO     ✅ STAGE 6 PASSED: Generation request submitted.
+[01:31:43] INFO     ⏳ Waiting for generation to complete (looking for 'Make video' or video element) …
+[01:31:43] INFO        ⏳ Still generating … 0s
+[01:31:58] INFO        ⏳ Still generating … 15s
+[01:32:13] INFO        ⏳ Still generating … 30s
+[01:32:28] INFO        ⏳ Still generating … 45s
+[01:32:43] INFO        ⏳ Still generating … 60s
+[01:32:55] INFO     ✅ Video element found after 72s — video generated directly.
+[01:32:55] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_video_direct.png
+[01:32:55] INFO     STAGE 7: Clicking 'Make video' button
+[01:32:55] WARNING  ⚠️  'Make video' button not visible — maybe video was generated directly.
+[01:32:55] INFO     STAGE 8: Downloading generated video
+[01:32:55] INFO        Trying Strategy 1: Extract video src URL …
+[01:32:55] INFO     🔗 Video URL found: https://assets.grok.com/users/8dbf2400-2043-4217-8f1b-f55601499675/generated/4804e1e6-8759-4ba9-af2b-7406d8fadb10/genera…
+[01:32:55] INFO     ⬇️  Downloading video to /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_3.mp4 …
+[01:32:56] WARNING  ⚠️  Direct download failed: HTTP Error 403: Forbidden — trying Strategy 2.
+[01:32:56] INFO        Trying Strategy 2: Click download button …
+[01:32:56] INFO        Found download element: button[aria-label*="ownload"]
+[01:32:56] INFO     ⬇️  Attempt 1/3 …
+[01:32:59] INFO     ✅ STAGE 8 PASSED (Strategy 2): /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_3.mp4 (2.36 MB)
+[01:32:59] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/08_download_success.png
+[01:32:59] INFO     🎉 SUCCESS!
+[01:33:00] INFO     STAGE 3: Ensuring Video mode is selected
+[01:33:00] DEBUG    🕐 Human delay 0.7s before checking mode
+[01:33:00] INFO        Current mode button text: ''
+[01:33:00] INFO        Switching to Video mode …
+[01:33:03] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/03_settings_dropdown.png
+[01:33:33] WARNING  ⚠️  STAGE 3 WARNING: Video option not found in dropdown.
+[01:33:33] INFO     STAGE 4: Uploading image
+[01:33:33] INFO     🖼️  Image: /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_4_start_frame.jpg (0.14 MB)
+[01:33:33] INFO     📤 File set on input.
+[01:33:33] DEBUG    🕐 Human delay 2.6s after file select
+[01:33:35] DEBUG    ✅ 'upload visible' met on attempt 1/20
+[01:33:35] INFO     ✅ STAGE 4 PASSED: Image visible in UI.
+[01:33:35] INFO     ⏳ Waiting 60s for Grok to process image …
+[01:33:45] INFO        … 50s remaining
+[01:33:55] INFO        … 40s remaining
+[01:34:05] INFO        … 30s remaining
+[01:34:15] INFO        … 20s remaining
+[01:34:25] INFO        … 10s remaining
+[01:34:35] INFO     =======================================================
+[01:34:35] INFO     🎬 Grok Video Generation - New Video
+[01:34:35] INFO        Prompt   : Environment: A quiet nighttime laboratory illuminated by a few dim lamps and faint electrical light creating deep shadows across wooden tables and machines, maintaining a sepia vintage cinema documentary look with grain and scratches. Character: Tesla wearing the same formal suit and vest, appearing thoughtful and slightly tense. Objects: A large experimental generator machine connected to coils and wires with a metal activation lever. Movement: During the 10 second scene Tesla slowly approaches the machine and places his hand on the metal lever, pausing briefly as sparks begin appearing around the device before preparing to activate the experiment.
+[01:34:35] INFO        Output   : /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_4.mp4
+[01:34:35] INFO     =======================================================
+[01:34:35] INFO     STAGE 5: Entering prompt
+[01:34:35] INFO     📝 «Environment: A quiet nighttime laboratory illuminated by a few dim lamps and faint electrical light creating deep shadows across wooden tables and machines, maintaining a sepia vintage cinema documentary look with grain and scratches. Character: Tesla wearing the same formal suit and vest, appearing thoughtful and slightly tense. Objects: A large experimental generator machine connected to coils and wires with a metal activation lever. Movement: During the 10 second scene Tesla slowly approaches the machine and places his hand on the metal lever, pausing briefly as sparks begin appearing around the device before preparing to activate the experiment.»
+[01:34:35] DEBUG    🖱️  Scroll up 220px
+[01:34:36] DEBUG    🕐 Human delay 2.7s before typing prompt
+[01:34:39] DEBUG    🖱️  Mouse jiggle → (291, 184)
+[01:34:44] DEBUG    Strategy 'textarea' failed: Locator.wait_for: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("textarea").first
+
+[01:34:45] INFO     ✏️  Entered via ProseMirror.
+[01:34:46] DEBUG    ✅ 'prompt in DOM' met on attempt 1/8
+[01:34:46] INFO     ✅ STAGE 5 PASSED: Prompt confirmed in DOM.
+[01:34:46] INFO     STAGE 6: Submitting generation request
+[01:34:46] DEBUG    🕐 Human delay 0.8s before pressing Enter
+[01:34:53] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_after_submit.png
+[01:34:53] INFO     ✅ STAGE 6 PASSED: Generation request submitted.
+[01:34:53] INFO     ⏳ Waiting for generation to complete (looking for 'Make video' or video element) …
+[01:34:53] INFO        ⏳ Still generating … 0s
+[01:35:08] INFO        ⏳ Still generating … 15s
+[01:35:23] INFO        ⏳ Still generating … 30s
+[01:35:38] INFO        ⏳ Still generating … 45s
+[01:35:53] INFO        ⏳ Still generating … 60s
+[01:36:08] INFO        ⏳ Still generating … 75s
+[01:36:23] INFO     ✅ Video element found after 90s — video generated directly.
+[01:36:23] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_video_direct.png
+[01:36:23] INFO     STAGE 7: Clicking 'Make video' button
+[01:36:23] WARNING  ⚠️  'Make video' button not visible — maybe video was generated directly.
+[01:36:23] INFO     STAGE 8: Downloading generated video
+[01:36:23] INFO        Trying Strategy 1: Extract video src URL …
+[01:36:23] INFO     🔗 Video URL found: https://assets.grok.com/users/8dbf2400-2043-4217-8f1b-f55601499675/generated/9fc97dc9-f722-4b0b-9537-748fb59c7f4e/genera…
+[01:36:23] INFO     ⬇️  Downloading video to /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_4.mp4 …
+[01:36:24] WARNING  ⚠️  Direct download failed: HTTP Error 403: Forbidden — trying Strategy 2.
+[01:36:24] INFO        Trying Strategy 2: Click download button …
+[01:36:24] INFO        Found download element: button[aria-label*="ownload"]
+[01:36:24] INFO     ⬇️  Attempt 1/3 …
+[01:36:26] INFO     ✅ STAGE 8 PASSED (Strategy 2): /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_4.mp4 (3.69 MB)
+[01:36:26] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/08_download_success.png
+[01:36:26] INFO     🎉 SUCCESS!
+[01:36:26] INFO     STAGE 3: Ensuring Video mode is selected
+[01:36:26] DEBUG    🕐 Human delay 0.8s before checking mode
+[01:36:27] INFO        Current mode button text: ''
+[01:36:27] INFO        Switching to Video mode …
+[01:36:29] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/03_settings_dropdown.png
+[01:36:59] WARNING  ⚠️  STAGE 3 WARNING: Video option not found in dropdown.
+[01:36:59] INFO     STAGE 4: Uploading image
+[01:36:59] INFO     🖼️  Image: /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_5_start_frame.jpg (0.13 MB)
+[01:36:59] INFO     📤 File set on input.
+[01:36:59] DEBUG    🕐 Human delay 1.1s after file select
+[01:37:01] DEBUG    ✅ 'upload visible' met on attempt 1/20
+[01:37:01] INFO     ✅ STAGE 4 PASSED: Image visible in UI.
+[01:37:01] INFO     ⏳ Waiting 60s for Grok to process image …
+[01:37:11] INFO        … 50s remaining
+[01:37:21] INFO        … 40s remaining
+[01:37:31] INFO        … 30s remaining
+[01:37:41] INFO        … 20s remaining
+[01:37:51] INFO        … 10s remaining
+[01:38:01] INFO     =======================================================
+[01:38:01] INFO     🎬 Grok Video Generation - New Video
+[01:38:01] INFO        Prompt   : Environment: The laboratory suddenly becomes brighter as electrical energy fills the room, still shown in sepia vintage film style with heavy grain and flickering exposure. Character: Tesla wearing his dark suit and vest watching the experiment with growing excitement and amazement. Objects: A large electrical coil machine in the center and several glass bulbs placed around the laboratory without wires. Movement: Over the 10 second moment the machine releases bright sparks and arcs of electricity while the surrounding bulbs slowly begin glowing wirelessly. Tesla looks around in surprise as the camera gently zooms out revealing the magical moment.
+[01:38:01] INFO        Output   : /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_5.mp4
+[01:38:01] INFO     =======================================================
+[01:38:01] INFO     STAGE 5: Entering prompt
+[01:38:01] INFO     📝 «Environment: The laboratory suddenly becomes brighter as electrical energy fills the room, still shown in sepia vintage film style with heavy grain and flickering exposure. Character: Tesla wearing his dark suit and vest watching the experiment with growing excitement and amazement. Objects: A large electrical coil machine in the center and several glass bulbs placed around the laboratory without wires. Movement: Over the 10 second moment the machine releases bright sparks and arcs of electricity while the surrounding bulbs slowly begin glowing wirelessly. Tesla looks around in surprise as the camera gently zooms out revealing the magical moment.»
+[01:38:01] DEBUG    🖱️  Scroll down 124px
+[01:38:01] DEBUG    🕐 Human delay 3.0s before typing prompt
+[01:38:04] DEBUG    🖱️  Mouse jiggle → (388, 313)
+[01:38:10] DEBUG    Strategy 'textarea' failed: Locator.wait_for: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("textarea").first
+
+[01:38:11] INFO     ✏️  Entered via ProseMirror.
+[01:38:12] DEBUG    ✅ 'prompt in DOM' met on attempt 1/8
+[01:38:12] INFO     ✅ STAGE 5 PASSED: Prompt confirmed in DOM.
+[01:38:12] INFO     STAGE 6: Submitting generation request
+[01:38:12] DEBUG    🕐 Human delay 1.2s before pressing Enter
+[01:38:20] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_after_submit.png
+[01:38:20] INFO     ✅ STAGE 6 PASSED: Generation request submitted.
+[01:38:20] INFO     ⏳ Waiting for generation to complete (looking for 'Make video' or video element) …
+[01:38:20] INFO        ⏳ Still generating … 0s
+[01:38:35] INFO        ⏳ Still generating … 15s
+[01:38:50] INFO        ⏳ Still generating … 30s
+[01:39:05] INFO        ⏳ Still generating … 45s
+[01:39:20] INFO        ⏳ Still generating … 60s
+[01:39:29] INFO     ✅ Video element found after 69s — video generated directly.
+[01:39:29] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_video_direct.png
+[01:39:29] INFO     STAGE 7: Clicking 'Make video' button
+[01:39:29] WARNING  ⚠️  'Make video' button not visible — maybe video was generated directly.
+[01:39:29] INFO     STAGE 8: Downloading generated video
+[01:39:29] INFO        Trying Strategy 1: Extract video src URL …
+[01:39:29] INFO     🔗 Video URL found: https://assets.grok.com/users/8dbf2400-2043-4217-8f1b-f55601499675/generated/d3de8490-862c-4250-9f6a-86d3c06debd5/genera…
+[01:39:29] INFO     ⬇️  Downloading video to /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_5.mp4 …
+[01:39:29] WARNING  ⚠️  Direct download failed: HTTP Error 403: Forbidden — trying Strategy 2.
+[01:39:29] INFO        Trying Strategy 2: Click download button …
+[01:39:29] INFO        Found download element: button[aria-label*="ownload"]
+[01:39:29] INFO     ⬇️  Attempt 1/3 …
+[01:39:32] INFO     ✅ STAGE 8 PASSED (Strategy 2): /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_5.mp4 (6.14 MB)
+[01:39:32] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/08_download_success.png
+[01:39:32] INFO     🎉 SUCCESS!
+[01:39:33] INFO     STAGE 3: Ensuring Video mode is selected
+[01:39:33] DEBUG    🕐 Human delay 0.9s before checking mode
+[01:39:34] INFO        Current mode button text: ''
+[01:39:34] INFO        Switching to Video mode …
+[01:39:36] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/03_settings_dropdown.png
+[01:40:06] WARNING  ⚠️  STAGE 3 WARNING: Video option not found in dropdown.
+[01:40:06] INFO     STAGE 4: Uploading image
+[01:40:06] INFO     🖼️  Image: /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_6_start_frame.jpg (0.12 MB)
+[01:40:06] INFO     📤 File set on input.
+[01:40:06] DEBUG    🕐 Human delay 1.5s after file select
+[01:40:08] DEBUG    ✅ 'upload visible' met on attempt 1/20
+[01:40:08] INFO     ✅ STAGE 4 PASSED: Image visible in UI.
+[01:40:08] INFO     ⏳ Waiting 60s for Grok to process image …
+[01:40:18] INFO        … 50s remaining
+[01:40:28] INFO        … 40s remaining
+[01:40:38] INFO        … 30s remaining
+[01:40:48] INFO        … 20s remaining
+[01:40:58] INFO        … 10s remaining
+[01:41:08] INFO     =======================================================
+[01:41:08] INFO     🎬 Grok Video Generation - New Video
+[01:41:08] INFO        Prompt   : Environment: The laboratory is now filled with warm glowing light from many wireless bulbs illuminating the entire room, presented in a sepia vintage documentary aesthetic with film grain, dust particles and subtle flickering exposure. Character: Tesla wearing his elegant early twentieth century suit and vest standing confidently beside the experiment. Objects: Multiple glowing glass bulbs around the laboratory and the large electrical coil machine humming softly in the background. Movement: During the 10 second closing shot Tesla calmly observes the success of his invention while the camera slowly pulls back revealing the entire laboratory glowing with wireless electricity.
+[01:41:08] INFO        Output   : /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_6.mp4
+[01:41:08] INFO     =======================================================
+[01:41:08] INFO     STAGE 5: Entering prompt
+[01:41:08] INFO     📝 «Environment: The laboratory is now filled with warm glowing light from many wireless bulbs illuminating the entire room, presented in a sepia vintage documentary aesthetic with film grain, dust particles and subtle flickering exposure. Character: Tesla wearing his elegant early twentieth century suit and vest standing confidently beside the experiment. Objects: Multiple glowing glass bulbs around the laboratory and the large electrical coil machine humming softly in the background. Movement: During the 10 second closing shot Tesla calmly observes the success of his invention while the camera slowly pulls back revealing the entire laboratory glowing with wireless electricity.»
+[01:41:08] DEBUG    🖱️  Scroll up 85px
+[01:41:08] DEBUG    🕐 Human delay 1.9s before typing prompt
+[01:41:10] DEBUG    🖱️  Mouse jiggle → (247, 536)
+[01:41:15] DEBUG    Strategy 'textarea' failed: Locator.wait_for: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("textarea").first
+
+[01:41:17] INFO     ✏️  Entered via ProseMirror.
+[01:41:18] DEBUG    ✅ 'prompt in DOM' met on attempt 1/8
+[01:41:18] INFO     ✅ STAGE 5 PASSED: Prompt confirmed in DOM.
+[01:41:18] INFO     STAGE 6: Submitting generation request
+[01:41:18] DEBUG    🕐 Human delay 0.8s before pressing Enter
+[01:41:23] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_after_submit.png
+[01:41:23] INFO     ✅ STAGE 6 PASSED: Generation request submitted.
+[01:41:23] INFO     ⏳ Waiting for generation to complete (looking for 'Make video' or video element) …
+[01:41:23] INFO        ⏳ Still generating … 0s
+[01:41:38] INFO        ⏳ Still generating … 15s
+[01:41:53] INFO        ⏳ Still generating … 30s
+[01:42:08] INFO        ⏳ Still generating … 45s
+[01:42:23] INFO        ⏳ Still generating … 60s
+[01:42:32] INFO     ✅ Video element found after 69s — video generated directly.
+[01:42:32] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_video_direct.png
+[01:42:32] INFO     STAGE 7: Clicking 'Make video' button
+[01:42:32] WARNING  ⚠️  'Make video' button not visible — maybe video was generated directly.
+[01:42:32] INFO     STAGE 8: Downloading generated video
+[01:42:32] INFO        Trying Strategy 1: Extract video src URL …
+[01:42:32] INFO     🔗 Video URL found: https://assets.grok.com/users/8dbf2400-2043-4217-8f1b-f55601499675/generated/5ba9635f-d28d-4011-a2f2-6766b59be009/genera…
+[01:42:32] INFO     ⬇️  Downloading video to /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_6.mp4 …
+[01:42:33] WARNING  ⚠️  Direct download failed: HTTP Error 403: Forbidden — trying Strategy 2.
+[01:42:33] INFO        Trying Strategy 2: Click download button …
+[01:42:33] INFO        Found download element: button[aria-label*="ownload"]
+[01:42:33] INFO     ⬇️  Attempt 1/3 …
+[01:42:35] INFO     ✅ STAGE 8 PASSED (Strategy 2): /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_6.mp4 (4.56 MB)
+[01:42:35] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/08_download_success.png
+[01:42:35] INFO     🎉 SUCCESS!
+[01:42:35] INFO     =======================================================
+[01:42:35] INFO     👋 Closing Grok session
+[01:42:35] INFO     =======================================================
