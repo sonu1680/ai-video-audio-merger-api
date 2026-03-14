@@ -20,7 +20,8 @@ def merge_videos(story_id: str, video_paths: List[Path], voiceover_path: Path = 
     bg_audio_path = BASE_DIR / "bg.mp3"
     
     has_bg_audio = bg_audio_path.exists()
-    has_voiceover = voiceover_path is not None and Path(voiceover_path).exists()
+    #has_voiceover = voiceover_path is not None and Path(voiceover_path).exists()
+    has_voiceover = False
     
     # We always start with a base merge
     base_merged_output = VIDEOS_DIR / f"temp_story_{story_id}_merged.mp4"

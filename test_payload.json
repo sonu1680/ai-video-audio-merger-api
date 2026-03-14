@@ -2,50 +2,44 @@
   "stories": [
     {
       "id": 1,
-      "title": "मेरी बिजली की कहानी",
+      "title": "भेल पूरी की गलती वाली खोज",
       "duration": "60 seconds",
       "modules": [
         {
           "module_number": 1,
           "time": "0-10 sec",
-          "voiceover": "टेस्ला कहता है, \"मेरा नाम निकोला टेस्ला है। बचपन से ही मुझे बिजली से एक अजीब आकर्षण था।\"",
-          "image_generation_prompt": "early 1900s laboratory interior with Nikola Tesla inspired inventor beside primitive electrical equipment and coils, sepia vintage film look heavy grain scratches",
-          "video_generation_prompt": "Environment: An early 1900s electrical laboratory filled with wooden tables, primitive electrical coils, wires, glass bulbs and scientific instruments. The room is dimly lit with a sepia black and white vintage documentary aesthetic, heavy film grain, scratches, dust particles and slight flickering exposure. Character: Nikola Tesla inspired inventor wearing a dark early twentieth century suit, vest, white shirt and tie with neatly combed hair. Objects: Electrical coils and glowing experimental equipment placed on a wooden table. Movement: Over 10 seconds Tesla slowly turns toward the camera, speaking thoughtfully while faint sparks flicker behind him as the camera performs a subtle cinematic push-in."
+          "image_generation_prompt": "ancient indian fort kitchen chef preparing food stone walls torches sepia vintage",
+          "video_generation_prompt": "Talking character delivering dialogue on camera with synchronized lip movement. The dialogue being spoken is: 'नमस्कार, मैं राजा की रसोई का मुख्य रसोइया हूँ। उस ज़माने में, राजा के किले में हर भोजन को परफेक्ट बनाना पड़ता था… वरना सिर कलम! हाहा, साला डर लगता था।' Ensure lip movements and pacing synchronize precisely with this dialogue over 10 seconds. Environment: Grand ancient Indian fort kitchen with stone walls, wooden counters, clay pots, flickering torches, spices scattered. Character: Middle-aged Indian chef, stout build, dark skin, mustache, wearing white dhoti-kurta and chef's turban, friendly yet nervous expression. Action: Gesturing with hands while speaking, slight smile with edgy humor. Movement: Subtle head nods and hand waves. Camera slowly pushes in."
         },
         {
           "module_number": 2,
           "time": "10-20 sec",
-          "voiceover": "टेस्ला सोचते हुए कहता है, \"दुनिया तारों से बिजली भेजती थी। लेकिन मैं सोचता था... अगर बिजली हवा में जा सके तो?\"",
-          "image_generation_prompt": "Tesla explaining electrical diagrams on wooden table vintage laboratory sepia film grain",
-          "video_generation_prompt": "Environment: The same early twentieth century laboratory with wooden tables, scattered scientific instruments and dim warm lighting creating a vintage documentary atmosphere with sepia tones, film grain and dust particles. Character: Tesla wearing the same formal dark suit and vest, appearing focused and curious. Objects: Several sheets of paper containing hand drawn electrical towers, energy waves and experimental sketches spread across a wooden work table. Movement: In the 10 second scene Tesla gently spreads the diagrams and points toward the drawings while explaining his idea. The camera slowly moves closer to the table revealing the sketches as subtle electrical humming fills the background."
+          "image_generation_prompt": "royal feast preparation chaos kitchen servants hurrying sepia vintage",
+          "video_generation_prompt": "Talking character delivering dialogue on camera with synchronized lip movement. The dialogue being spoken is: 'एक दिन राजा ने बड़ा भोज मंगवाया। मैंने सोचा, कुछ नया बनाऊँ… लेकिन जल्दबाज़ी में सामान इधर-उधर हो गया। कमिना समय, कभी साथ नहीं देता!' Ensure lip movements and pacing synchronize precisely with this dialogue over 10 seconds. Environment: Busy fort kitchen with servants rushing, piles of puffed rice, sev, potatoes, chutneys on tables, steam from pots. Character: Middle-aged Indian chef, stout build, dark skin, mustache, wearing white dhoti-kurta and chef's turban, stressed but witty look. Action: Wiping forehead while speaking, light gali with chuckle. Movement: Pacing slightly side to side. Camera subtle zoom in."
         },
         {
           "module_number": 3,
           "time": "20-30 sec",
-          "voiceover": "टेस्ला कहता है, \"अगर धरती खुद एक सर्किट बन जाए... तो बिजली बिना तारों के भी भेजी जा सकती है।\"",
-          "image_generation_prompt": "Tesla standing beside large experimental coil machine dramatic shadows sepia vintage cinema",
-          "video_generation_prompt": "Environment: A darker area of the laboratory where a large experimental electrical coil machine dominates the room. Dramatic shadows and faint electrical glow create a mysterious scientific atmosphere with sepia vintage film style, scratches and grain. Character: Tesla wearing his classic early twentieth century suit and vest, standing confidently beside the machine. Objects: A massive electrical coil device with metal rings, wires and glowing components. Movement: Over 10 seconds Tesla gestures toward the machine while explaining his theory and then gently places his hand on the coil apparatus. Small electrical sparks flicker as the camera slowly pushes in emphasizing the scale of the machine."
+          "image_generation_prompt": "chef curiously mixing ingredients wooden bowls spices sepia vintage",
+          "video_generation_prompt": "Talking character delivering dialogue on camera with synchronized lip movement. The dialogue being spoken is: 'मैंने चावल के फुले हुए दाने लिए, सेव मिलाई, आलू काटे… सोचा, क्या होगा अगर चटनी डाल दूँ? हरामी जिज्ञासा, रोक नहीं पाया।' Ensure lip movements and pacing synchronize precisely with this dialogue over 10 seconds. Environment: Close-up on kitchen counter with wooden bowls of ingredients, colorful spices, ancient utensils, dim torchlight. Character: Middle-aged Indian chef, stout build, dark skin, mustache, wearing white dhoti-kurta and chef's turban, curious and excited eyes. Action: Pretending to mix while speaking, smirk with humor. Movement: Leaning forward slightly. Camera slow pan right."
         },
         {
           "module_number": 4,
           "time": "30-40 sec",
-          "voiceover": "टेस्ला कहता है, \"उस रात मैंने अपना प्रयोग शुरू किया। सच कहूँ... मुझे भी नहीं पता था क्या होगा।\"",
-          "image_generation_prompt": "night laboratory Tesla preparing to activate generator machine sparks sepia vintage documentary",
-          "video_generation_prompt": "Environment: A quiet nighttime laboratory illuminated by a few dim lamps and faint electrical light creating deep shadows across wooden tables and machines, maintaining a sepia vintage cinema documentary look with grain and scratches. Character: Tesla wearing the same formal suit and vest, appearing thoughtful and slightly tense. Objects: A large experimental generator machine connected to coils and wires with a metal activation lever. Movement: During the 10 second scene Tesla slowly approaches the machine and places his hand on the metal lever, pausing briefly as sparks begin appearing around the device before preparing to activate the experiment."
+          "image_generation_prompt": "chef experimenting pouring chutney into mix confusion sepia vintage",
+          "video_generation_prompt": "Talking character delivering dialogue on camera with synchronized lip movement. The dialogue being spoken is: 'फिर मैंने टमाटर, प्याज़, हरी चटनी सब मिला दिया। लेकिन गलती से नींबू ज्यादा निचोड़ दिया… भेंचो, अब क्या होगा?' Ensure lip movements and pacing synchronize precisely with this dialogue over 10 seconds. Environment: Detailed kitchen scene with mixing bowl center, spilled ingredients, fort windows showing outside battlements. Character: Middle-aged Indian chef, stout build, dark skin, mustache, wearing white dhoti-kurta and chef's turban, surprised expression with edgy gali. Action: Mimicking pouring action while speaking. Movement: Quick hand gestures. Camera gentle tilt up."
         },
         {
           "module_number": 5,
           "time": "40-50 sec",
-          "voiceover": "टेस्ला हैरानी से कहता है, \"और फिर अचानक... बल्ब बिना तार के चमक उठे।\"",
-          "image_generation_prompt": "electrical coil sparks bulbs glowing wirelessly laboratory sepia vintage film grain",
-          "video_generation_prompt": "Environment: The laboratory suddenly becomes brighter as electrical energy fills the room, still shown in sepia vintage film style with heavy grain and flickering exposure. Character: Tesla wearing his dark suit and vest watching the experiment with growing excitement and amazement. Objects: A large electrical coil machine in the center and several glass bulbs placed around the laboratory without wires. Movement: Over the 10 second moment the machine releases bright sparks and arcs of electricity while the surrounding bulbs slowly begin glowing wirelessly. Tesla looks around in surprise as the camera gently zooms out revealing the magical moment."
+          "image_generation_prompt": "chef tasting accidental mix shock wide eyes sepia vintage",
+          "video_generation_prompt": "Talking character delivering dialogue on camera with synchronized lip movement. The dialogue being spoken is: 'चखा तो… वाह! खट्टा, मीठा, चटपटा सब एक साथ। साला गलती से कमाल हो गया! राजा को चखाया, वो बोले, 'ये क्या जादू है?' Ensure lip movements and pacing synchronize precisely with this dialogue over 10 seconds. Environment: Kitchen with finished mix in bowl, excited atmosphere, light streaming in. Character: Middle-aged Indian chef, stout build, dark skin, mustache, wearing white dhoti-kurta and chef's turban, shocked then delighted face. Action: Tasting gesture, laughing with surprise. Movement: Eyes widening. Camera quick push in."
         },
         {
           "module_number": 6,
           "time": "50-60 sec",
-          "voiceover": "टेस्ला कहता है, \"उस पल मुझे समझ आया... बिजली भी हवा की तरह सबकी हो सकती है।\"",
-          "image_generation_prompt": "laboratory glowing with wireless bulbs Tesla proudly beside machine sepia vintage documentary",
-          "video_generation_prompt": "Environment: The laboratory is now filled with warm glowing light from many wireless bulbs illuminating the entire room, presented in a sepia vintage documentary aesthetic with film grain, dust particles and subtle flickering exposure. Character: Tesla wearing his elegant early twentieth century suit and vest standing confidently beside the experiment. Objects: Multiple glowing glass bulbs around the laboratory and the large electrical coil machine humming softly in the background. Movement: During the 10 second closing shot Tesla calmly observes the success of his invention while the camera slowly pulls back revealing the entire laboratory glowing with wireless electricity."
+          "image_generation_prompt": "king and chef celebrating new dish fort hall feast sepia vintage",
+          "video_generation_prompt": "Talking character delivering dialogue on camera with synchronized lip movement. The dialogue being spoken is: 'और बस, भेल पूरी का जन्म हो गया। आज हर गली में मिलती है। याद रखो, गलतियाँ कभी-कभी चमत्कार बन जाती हैं… जय हो!' Ensure lip movements and pacing synchronize precisely with this dialogue over 10 seconds. Environment: Grand fort hall with feast table, king in background, joyful servants, ornate decorations. Character: Middle-aged Indian chef, stout build, dark skin, mustache, wearing white dhoti-kurta and chef's turban, proud and inspiring smile. Action: Raising hands triumphantly while speaking. Movement: Nodding affirmatively. Camera slow pull out."
         }
       ]
     }
