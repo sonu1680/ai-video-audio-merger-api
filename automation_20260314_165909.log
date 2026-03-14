@@ -1,0 +1,43 @@
+[16:59:09] INFO     📋 Full debug log → automation_20260314_165909.log
+[16:59:09] INFO     =======================================================
+[16:59:09] INFO     🚀 Grok Video Generation Automation - Starting Session
+[16:59:09] INFO        Image    : None
+[16:59:09] INFO     =======================================================
+[16:59:09] INFO     STAGE 1: Launching Chrome
+[16:59:10] INFO     ✅ STAGE 1 PASSED: Chrome launched.
+[16:59:10] INFO     STAGE 2: Navigating to Grok
+[16:59:11] INFO     ⏳ Waiting 8.3s for UI to settle …
+[16:59:19] DEBUG    🖱️  Scroll up 138px
+[16:59:20] DEBUG    🖱️  Mouse jiggle → (631, 251)
+[16:59:20] INFO     ✅ STAGE 2 PASSED: Page loaded.
+[16:59:20] DEBUG    🕐 Human delay 1.5s post-navigation
+[16:59:22] INFO     STAGE 3: Ensuring Video mode is selected
+[16:59:22] DEBUG    🕐 Human delay 0.7s before checking mode
+[16:59:22] WARNING  ⚠️  Settings button not found — trying to continue anyway.
+[16:59:23] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/03_no_settings_btn.png
+[16:59:23] INFO     =======================================================
+[16:59:23] INFO     🎬 Grok Video Generation - New Video
+[16:59:23] INFO        Prompt   : IMAGE CONTEXT:
+ancient indian fort kitchen chef preparing food stone walls torches sepia vintage
+
+VIDEO INSTRUCTIONS:
+Talking character delivering dialogue on camera with synchronized lip movement. The dialogue being spoken is: 'नमस्कार, मैं राजा की रसोई का मुख्य रसोइया हूँ। उस ज़माने में, राजा के किले में हर भोजन को परफेक्ट बनाना पड़ता था… वरना सिर कलम! हाहा, साला डर लगता था।' Ensure lip movements and pacing synchronize precisely with this dialogue over 10 seconds. Environment: Grand ancient Indian fort kitchen with stone walls, wooden counters, clay pots, flickering torches, spices scattered. Character: Middle-aged Indian chef, stout build, dark skin, mustache, wearing white dhoti-kurta and chef's turban, friendly yet nervous expression. Action: Gesturing with hands while speaking, slight smile with edgy humor. Movement: Subtle head nods and hand waves. Camera slowly pushes in.
+[16:59:23] INFO        Output   : /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_1.mp4
+[16:59:23] INFO     =======================================================
+[16:59:23] INFO     STAGE 5: Entering prompt
+[16:59:23] INFO     📝 «IMAGE CONTEXT:
+ancient indian fort kitchen chef preparing food stone walls torches sepia vintage
+
+VIDEO INSTRUCTIONS:
+Talking character delivering dialogue on camera with synchronized lip movement. The dialogue being spoken is: 'नमस्कार, मैं राजा की रसोई का मुख्य रसोइया हूँ। उस ज़माने में, राजा के किले में हर भोजन को परफेक्ट बनाना पड़ता था… वरना सिर कलम! हाहा, साला डर लगता था।' Ensure lip movements and pacing synchronize precisely with this dialogue over 10 seconds. Environment: Grand ancient Indian fort kitchen with stone walls, wooden counters, clay pots, flickering torches, spices scattered. Character: Middle-aged Indian chef, stout build, dark skin, mustache, wearing white dhoti-kurta and chef's turban, friendly yet nervous expression. Action: Gesturing with hands while speaking, slight smile with edgy humor. Movement: Subtle head nods and hand waves. Camera slowly pushes in.»
+[16:59:23] DEBUG    🖱️  Scroll down 167px
+[16:59:23] DEBUG    🕐 Human delay 2.4s before typing prompt
+[16:59:27] DEBUG    🖱️  Mouse jiggle → (830, 432)
+[16:59:28] DEBUG    Strategy 'textarea' failed: Locator.wait_for: Target page, context or browser has been closed
+Call log:
+  - waiting for locator("textarea").first
+
+[16:59:28] DEBUG    Strategy 'ProseMirror' failed: Locator.wait_for: Target page, context or browser has been closed
+[16:59:28] DEBUG    Strategy 'keyboard.type' failed: Keyboard.type: Target page, context or browser has been closed
+[16:59:28] WARNING  Screenshot '05_prompt_fail.png' failed: Page.screenshot: Target page, context or browser has been closed
+[16:59:28] ERROR    ❌ Generation failed: All prompt-entry strategies failed.

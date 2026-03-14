@@ -205,7 +205,18 @@ async def _process_payload_sequentially(payload: Union[TestPayload, List[StoryPa
                             source_video_path=str(final_video_path.absolute())
                         )
                     
-                    await loop.run_in_executor(None, _run_webhook_task)
+                    webhook_success = await loop.run_in_executor(None, _run_webhook_task)
+                    
+                    if webhook_success:
+                        import shutil
+                        log.info(f"[story_id: {current_story_id}] 🧹 Webhook successful. Cleaning up videos directory...")
+                        if VIDEOS_DIR.exists():
+                            try:
+                                shutil.rmtree(VIDEOS_DIR)
+                                VIDEOS_DIR.mkdir(exist_ok=True)
+                                log.info(f"[story_id: {current_story_id}] ✅ Videos folder completely deleted and recreated.")
+                            except Exception as cleanup_err:
+                                log.error(f"[story_id: {current_story_id}] ❌ Failed to clean videos folder: {cleanup_err}")
                     
             except Exception as e:
                 log.error(f"[story_id: {current_story_id}] ❌ Sequence failed: {e}")
