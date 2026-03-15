@@ -90,6 +90,9 @@ class ModulePayload(BaseModel):
 class StoryPayload(BaseModel):
     id: Optional[Union[int, str]] = None
     story_id: Optional[Union[int, str]] = None
+    title: Optional[str] = None
+    description: Optional[str] = None
+    tags: Optional[str] = None
     voiceover_main_prompt: Optional[str] = None
     voiceover_script: Optional[str] = None
     modules: List[ModulePayload]
@@ -202,6 +205,9 @@ async def _process_payload_sequentially(payload: Union[TestPayload, List[StoryPa
                             str(current_story_id), 
                             bucket_filename, 
                             timestamp_str, 
+                            title=story.title,
+                            description=story.description,
+                            tags=story.tags,
                             source_video_path=str(final_video_path.absolute())
                         )
                     
@@ -326,6 +332,9 @@ class WebhookTestPayload(BaseModel):
     story_id: str
     bucket_filename: str
     timestamp_str: str
+    title: Optional[str] = None
+    description: Optional[str] = None
+    tags: Optional[str] = None
     source_video_path: Optional[str] = None
 
 @app.post("/api/test_webhook", summary="Test the n8n webhook module independently")
@@ -336,6 +345,9 @@ async def test_webhook(payload: WebhookTestPayload, background_tasks: Background
             payload.story_id, 
             payload.bucket_filename, 
             payload.timestamp_str,
+            title=payload.title,
+            description=payload.description,
+            tags=payload.tags,
             source_video_path=payload.source_video_path
         )
     background_tasks.add_task(_run_test)

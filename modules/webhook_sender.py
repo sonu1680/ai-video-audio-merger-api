@@ -35,8 +35,8 @@ def create_retrying_session() -> requests.Session:
     session.mount('https://', adapter)
     return session
 
-def send_n8n_webhook(story_id: str, bucket_filename: str, timestamp_str: str, source_video_path: str = None) -> bool:
-    """Sends a successful video generation payload and the MP4 file to the n8n webhook."""
+def send_n8n_webhook(story_id: str, bucket_filename: str, timestamp_str: str, title: str = None, description: str = None, tags: str = None, source_video_path: str = None) -> bool:
+    """Sends a successful video generation payload to the n8n webhook."""
     try:
         public_video_url = f"{VIDEO_PUBLIC_DOMAIN}/{bucket_filename}"
         
@@ -44,34 +44,17 @@ def send_n8n_webhook(story_id: str, bucket_filename: str, timestamp_str: str, so
         data_payload = {
             "story_id": story_id,
             "video_url": public_video_url,
-            "timestamp": timestamp_str
+            "timestamp": timestamp_str,
+            "title": title,
+            "description": description,
+            "tags": tags
         }
         
-        log.info(f"[story_id: {story_id}] 📡 Sending webhook to {N8N_WEBHOOK_URL} with multipart/form-data")
+        log.info(f"[story_id: {story_id}] 📡 Sending JSON webhook to {N8N_WEBHOOK_URL}")
         
         session = create_retrying_session()
         
-        # If the local video path is provided, attach it as a file
-        if source_video_path and os.path.exists(source_video_path):
-            with open(source_video_path, "rb") as video_file:
-                # The 'file' key matches what many webhook consumers expect for the binary payload
-                files = {
-                    "file": (os.path.basename(source_video_path), video_file, "video/mp4")
-                }
-                
-                # We need a long timeout for large payloads. N8n can sometimes be very slow to process multipart forms.
-                # Increase timeout to 300 seconds (5 minutes) and also prevent SSL truncation bugs.
-                response = session.post(
-                    N8N_WEBHOOK_URL, 
-                    data=data_payload, 
-                    files=files, 
-                    timeout=300, 
-                    verify=False,
-                    stream=False # Try to push it as a single block to avoid read timeout drops
-                )
-        else:
-            log.warning(f"[story_id: {story_id}] ⚠️ Source video path missing or invalid, sending JSON webhook only.")
-            response = session.post(N8N_WEBHOOK_URL, json=data_payload, timeout=10, verify=False)
+        response = session.post(N8N_WEBHOOK_URL, json=data_payload, timeout=10, verify=False)
         
         if response.status_code in (200, 201, 202):
             log.info(f"[story_id: {story_id}] ✅ Webhook sent successfully")
