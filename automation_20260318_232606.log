@@ -1,0 +1,156 @@
+[23:26:06] INFO     📋 Full debug log → automation_20260318_232606.log
+[23:26:06] INFO     =======================================================
+[23:26:06] INFO     🚀 Grok Video Generation Automation - Starting Session
+[23:26:06] INFO        Image    : None
+[23:26:06] INFO     =======================================================
+[23:26:06] INFO     STAGE 1: Launching Chrome
+[23:26:06] INFO     ✅ STAGE 1 PASSED: Chrome launched.
+[23:26:06] INFO     STAGE 2: Navigating to Grok
+[23:26:07] INFO     ⏳ Waiting 7.5s for UI to settle …
+[23:26:15] DEBUG    🖱️  Scroll down 150px
+[23:26:16] DEBUG    🖱️  Mouse jiggle → (645, 386)
+[23:26:17] INFO     ✅ STAGE 2 PASSED: Page loaded.
+[23:26:17] DEBUG    🕐 Human delay 1.6s post-navigation
+[23:26:18] INFO     STAGE 3: Ensuring Video mode is selected
+[23:26:18] DEBUG    🕐 Human delay 0.9s before checking mode
+[23:26:19] WARNING  ⚠️  Settings button not found — trying to continue anyway.
+[23:26:20] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/03_no_settings_btn.png
+[23:26:20] INFO     STAGE 4: Uploading image
+[23:26:20] INFO     🖼️  Image: /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_5_start_frame.jpg (0.10 MB)
+[23:26:20] INFO     📤 File set on input.
+[23:26:20] DEBUG    🕐 Human delay 2.5s after file select
+[23:26:22] DEBUG    ✅ 'upload visible' met on attempt 1/20
+[23:26:22] INFO     ✅ STAGE 4 PASSED: Image visible in UI.
+[23:26:22] INFO     ⏳ Waiting dynamically (up to 60s) for Grok to process image …
+[23:26:22] DEBUG    ✅ 'upload finished' met on attempt 1/1
+[23:26:22] INFO     ✅ STAGE 4: Image fully uploaded/processed after ~0s.
+[23:26:24] INFO     =======================================================
+[23:26:24] INFO     🎬 Grok Video Generation - New Video
+[23:26:24] INFO        Prompt   : Talking character delivering dialogue on camera with synchronized lip movement. The dialogue being spoken is: 'चखा तो… वाह! खट्टा, मीठा, चटपटा सब एक साथ। साला गलती से कमाल हो गया! राजा को चखाया, वो बोले, 'ये क्या जादू है?' Ensure lip movements and pacing synchronize precisely with this dialogue over 10 seconds. Environment: Kitchen with finished mix in bowl, excited atmosphere, light streaming in. Character: Middle-aged Indian chef, stout build, dark skin, mustache, wearing white dhoti-kurta and chef's turban, shocked then delighted face. Action: Tasting gesture, laughing with surprise. Movement: Eyes widening. Camera quick push in.
+[23:26:24] INFO        Output   : /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_5.mp4
+[23:26:24] INFO     =======================================================
+[23:26:24] INFO     STAGE 5: Entering prompt
+[23:26:24] INFO     📝 «Talking character delivering dialogue on camera with synchronized lip movement. The dialogue being spoken is: 'चखा तो… वाह! खट्टा, मीठा, चटपटा सब एक साथ। साला गलती से कमाल हो गया! राजा को चखाया, वो बोले, 'ये क्या जादू है?' Ensure lip movements and pacing synchronize precisely with this dialogue over 10 seconds. Environment: Kitchen with finished mix in bowl, excited atmosphere, light streaming in. Character: Middle-aged Indian chef, stout build, dark skin, mustache, wearing white dhoti-kurta and chef's turban, shocked then delighted face. Action: Tasting gesture, laughing with surprise. Movement: Eyes widening. Camera quick push in.»
+[23:26:24] DEBUG    🖱️  Scroll up 180px
+[23:26:25] DEBUG    🕐 Human delay 1.4s before typing prompt
+[23:26:26] DEBUG    🖱️  Mouse jiggle → (355, 399)
+[23:26:32] DEBUG    Strategy 'textarea' failed: Locator.wait_for: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("textarea").first
+
+[23:26:33] INFO     ✏️  Entered via ProseMirror.
+[23:26:34] DEBUG    ✅ 'prompt in DOM' met on attempt 1/8
+[23:26:34] INFO     ✅ STAGE 5 PASSED: Prompt confirmed in DOM.
+[23:26:34] INFO     STAGE 6: Submitting generation request
+[23:26:34] DEBUG    🕐 Human delay 0.9s before pressing Enter
+[23:26:41] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_after_submit.png
+[23:26:41] INFO     ✅ STAGE 6 PASSED: Generation request submitted.
+[23:26:41] INFO     ⏳ Waiting for generation to complete (looking for 'Make video' or video element) …
+[23:26:41] INFO        ⏳ Still generating … 0s
+[23:26:56] INFO        ⏳ Still generating … 15s
+[23:27:11] INFO        ⏳ Still generating … 30s
+[23:27:26] INFO        ⏳ Still generating … 45s
+[23:27:41] INFO        ⏳ Still generating … 60s
+[23:27:53] INFO     ✅ Video element found after 72s — video generated directly.
+[23:27:53] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_video_direct.png
+[23:27:53] INFO     STAGE 7: Clicking 'Make video' button
+[23:27:54] WARNING  ⚠️  'Make video' button not visible — maybe video was generated directly.
+[23:27:54] INFO     STAGE 8: Downloading generated video
+[23:27:54] INFO        Trying Strategy 1: Extract video src URL …
+[23:27:54] INFO     🔗 Video URL found: https://assets.grok.com/users/8dbf2400-2043-4217-8f1b-f55601499675/generated/004959e2-0d26-44b2-adf3-ab6afc791d05/genera…
+[23:27:54] INFO     ⬇️  Downloading video to /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_5.mp4 …
+[23:27:54] WARNING  ⚠️  Direct download failed: HTTP Error 403: Forbidden — trying Strategy 2.
+[23:27:54] INFO        Trying Strategy 2: Click download button …
+[23:27:54] INFO        Found download element: button[aria-label*="ownload"]
+[23:27:54] INFO     ⬇️  Attempt 1/3 …
+[23:28:24] WARNING  Click attempt failed: Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("button[aria-label*=\"ownload\"]").first
+    - locator resolved to <button type="button" data-state="closed" aria-label="Download" class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium leading-[normal] cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-60 disabled:cursor-not-allowed transition-colors duration-100 [&_svg]:shrink-0 select-none hover:text-fg-primary disabled:hover:bg-transparent border border-transparent rounded-full overflow-hidden h-10 w-10 p-2 bg-surface-l2 text…>…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex items-center p-2 gap-2 border-b border-border-l1">…</div> from <div class="absolute left-0 bottom-0 w-full px-3 pb-6 pointer-events-none z-10">…</div> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="flex items-center p-2 gap-2 border-b border-border-l1">…</div> from <div class="absolute left-0 bottom-0 w-full px-3 pb-6 pointer-events-none z-10">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    55 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="flex items-center p-2 gap-2 border-b border-border-l1">…</div> from <div class="absolute left-0 bottom-0 w-full px-3 pb-6 pointer-events-none z-10">…</div> subtree intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+[23:28:41] INFO     ✅ STAGE 8 PASSED (Strategy 2): /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_5.mp4 (2.26 MB)
+[23:28:41] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/08_download_success.png
+[23:28:41] INFO     🎉 SUCCESS!
+[23:28:41] INFO     STAGE 3: Ensuring Video mode is selected
+[23:28:41] DEBUG    🕐 Human delay 0.7s before checking mode
+[23:28:42] INFO        Current mode button text: ''
+[23:28:42] INFO        Switching to Video mode …
+[23:28:44] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/03_settings_dropdown.png
+[23:29:14] WARNING  ⚠️  STAGE 3 WARNING: Video option not found in dropdown.
+[23:29:14] INFO     STAGE 4: Uploading image
+[23:29:14] INFO     🖼️  Image: /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_6_start_frame.jpg (0.06 MB)
+[23:29:14] INFO     📤 File set on input.
+[23:29:14] DEBUG    🕐 Human delay 1.6s after file select
+[23:29:16] DEBUG    ✅ 'upload visible' met on attempt 1/20
+[23:29:16] INFO     ✅ STAGE 4 PASSED: Image visible in UI.
+[23:29:16] INFO     ⏳ Waiting dynamically (up to 60s) for Grok to process image …
+[23:29:16] DEBUG    ✅ 'upload finished' met on attempt 1/1
+[23:29:16] INFO     ✅ STAGE 4: Image fully uploaded/processed after ~0s.
+[23:29:18] INFO     =======================================================
+[23:29:18] INFO     🎬 Grok Video Generation - New Video
+[23:29:18] INFO        Prompt   : Talking character delivering dialogue on camera with synchronized lip movement. The dialogue being spoken is: 'और बस, भेल पूरी का जन्म हो गया। आज हर गली में मिलती है। याद रखो, गलतियाँ कभी-कभी चमत्कार बन जाती हैं… जय हो!' Ensure lip movements and pacing synchronize precisely with this dialogue over 10 seconds. Environment: Grand fort hall with feast table, king in background, joyful servants, ornate decorations. Character: Middle-aged Indian chef, stout build, dark skin, mustache, wearing white dhoti-kurta and chef's turban, proud and inspiring smile. Action: Raising hands triumphantly while speaking. Movement: Nodding affirmatively. Camera slow pull out.
+[23:29:18] INFO        Output   : /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_6.mp4
+[23:29:18] INFO     =======================================================
+[23:29:18] INFO     STAGE 5: Entering prompt
+[23:29:18] INFO     📝 «Talking character delivering dialogue on camera with synchronized lip movement. The dialogue being spoken is: 'और बस, भेल पूरी का जन्म हो गया। आज हर गली में मिलती है। याद रखो, गलतियाँ कभी-कभी चमत्कार बन जाती हैं… जय हो!' Ensure lip movements and pacing synchronize precisely with this dialogue over 10 seconds. Environment: Grand fort hall with feast table, king in background, joyful servants, ornate decorations. Character: Middle-aged Indian chef, stout build, dark skin, mustache, wearing white dhoti-kurta and chef's turban, proud and inspiring smile. Action: Raising hands triumphantly while speaking. Movement: Nodding affirmatively. Camera slow pull out.»
+[23:29:18] DEBUG    🖱️  Scroll up 115px
+[23:29:19] DEBUG    🕐 Human delay 1.2s before typing prompt
+[23:29:20] DEBUG    🖱️  Mouse jiggle → (807, 285)
+[23:29:25] DEBUG    Strategy 'textarea' failed: Locator.wait_for: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("textarea").first
+
+[23:29:27] INFO     ✏️  Entered via ProseMirror.
+[23:29:28] DEBUG    ✅ 'prompt in DOM' met on attempt 1/8
+[23:29:28] INFO     ✅ STAGE 5 PASSED: Prompt confirmed in DOM.
+[23:29:28] INFO     STAGE 6: Submitting generation request
+[23:29:28] DEBUG    🕐 Human delay 0.8s before pressing Enter
+[23:29:35] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_after_submit.png
+[23:29:35] INFO     ✅ STAGE 6 PASSED: Generation request submitted.
+[23:29:35] INFO     ⏳ Waiting for generation to complete (looking for 'Make video' or video element) …
+[23:29:35] INFO        ⏳ Still generating … 0s
+[23:29:50] INFO        ⏳ Still generating … 15s
+[23:30:05] INFO        ⏳ Still generating … 30s
+[23:30:20] INFO        ⏳ Still generating … 45s
+[23:30:35] INFO        ⏳ Still generating … 60s
+[23:30:50] INFO        ⏳ Still generating … 75s
+[23:31:02] INFO     ✅ Video element found after 87s — video generated directly.
+[23:31:03] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/06_video_direct.png
+[23:31:03] INFO     STAGE 7: Clicking 'Make video' button
+[23:31:03] WARNING  ⚠️  'Make video' button not visible — maybe video was generated directly.
+[23:31:03] INFO     STAGE 8: Downloading generated video
+[23:31:03] INFO        Trying Strategy 1: Extract video src URL …
+[23:31:03] INFO     🔗 Video URL found: https://assets.grok.com/users/8dbf2400-2043-4217-8f1b-f55601499675/generated/bc76f83e-532f-472b-801e-8b0282897346/genera…
+[23:31:03] INFO     ⬇️  Downloading video to /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_6.mp4 …
+[23:31:03] WARNING  ⚠️  Direct download failed: HTTP Error 403: Forbidden — trying Strategy 2.
+[23:31:03] INFO        Trying Strategy 2: Click download button …
+[23:31:03] INFO        Found download element: button[aria-label*="ownload"]
+[23:31:03] INFO     ⬇️  Attempt 1/3 …
+[23:31:10] INFO     ✅ STAGE 8 PASSED (Strategy 2): /home/sonupandit/Documents/ai-vide-api/twitter-automation/videos/module_6.mp4 (2.91 MB)
+[23:31:10] INFO     📸 Screenshot → /home/sonupandit/Documents/ai-vide-api/twitter-automation/08_download_success.png
+[23:31:10] INFO     🎉 SUCCESS!
+[23:31:10] INFO     =======================================================
+[23:31:10] INFO     👋 Closing Grok session
+[23:31:10] INFO     =======================================================

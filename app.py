@@ -279,12 +279,44 @@ def _stage_upload_image(page, image_path: str, log) -> bool:
     else:
         log.warning("⚠️  STAGE 4 WARNING: Upload UI not confirmed, continuing.")
 
-    log.info(f"⏳ Waiting {IMAGE_UPLOAD_WAIT}s for Grok to process image …")
-    for elapsed in range(0, IMAGE_UPLOAD_WAIT, 10):
-        time.sleep(10)
-        remaining = IMAGE_UPLOAD_WAIT - elapsed - 10
-        if remaining > 0:
-            log.info(f"   … {remaining}s remaining")
+    def _upload_finished():
+        return page.evaluate("""() => {
+            // Check if there are any specific asset URLs
+            const imgs = Array.from(document.querySelectorAll('img'));
+            const hasAsset = imgs.some(img => img.src && img.src.includes('assets.grok.com/users'));
+            if (hasAsset) return true;
+
+            // Check for progress indicators overlaying the image
+            const hasProgress = !!document.querySelector('progress, [role="progressbar"], .animate-spin, svg circle[stroke-dasharray]');
+            const loadingText = document.body.innerText.toLowerCase().includes('uploading');
+
+            const hasRemoveBtn = !!document.querySelector('button[aria-label="Remove"], button[aria-label*="remove"]');
+
+            // If we have a remove button and no loading indicators, assume it's done
+            if (hasRemoveBtn && !hasProgress && !loadingText) {
+                return true;
+            }
+
+            return false;
+        }""")
+
+    log.info(f"⏳ Waiting dynamically (up to {IMAGE_UPLOAD_WAIT}s) for Grok to process image …")
+    
+    # Wait dynamically instead of flat sleep 60s
+    upload_done = False
+    for elapsed in range(IMAGE_UPLOAD_WAIT):
+        if _poll(_upload_finished, 1, 1.0, "upload finished", log):
+            upload_done = True
+            log.info(f"✅ STAGE 4: Image fully uploaded/processed after ~{elapsed}s.")
+            break
+        # Optional: human delay equivalent
+        time.sleep(1)
+
+    if not upload_done:
+        log.warning("⚠️  STAGE 4 WARNING: Dynamic wait timed out, continuing anyway.")
+        
+    # Extra small buffer to ensure the UI is fully responsive before prompt entry
+    time.sleep(2)
 
     return True
 

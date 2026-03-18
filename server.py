@@ -17,6 +17,7 @@ import uuid
 import logging
 from pathlib import Path
 from contextlib import asynccontextmanager
+from send2trash import send2trash
 
 from fastapi import FastAPI, HTTPException, BackgroundTasks
 from fastapi.responses import FileResponse, JSONResponse
@@ -144,7 +145,7 @@ def _cleanup(path: str) -> None:
     """Delete temp video file after response is sent."""
     try:
         if os.path.exists(path):
-            os.remove(path)
+            send2trash(path)
             log.info(f"🗑️  Cleaned up {path}")
     except Exception as e:
         log.warning(f"Cleanup failed for {path}: {e}")
@@ -323,8 +324,6 @@ async def _handle_generation(prompt: str, background_tasks: BackgroundTasks) -> 
         },
     )
 
-# source venv/bin/activate
-    #uvicorn server:app --host 0.0.0.0 --port 8000 --reload
 
 # ─────────────────────────── DEBUG ENDPOINTS ──────────────────────────────────
 

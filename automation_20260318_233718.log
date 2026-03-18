@@ -1,0 +1,9 @@
+[23:37:18] INFO     📋 Full debug log → automation_20260318_233718.log
+[23:37:18] INFO     =======================================================
+[23:37:18] INFO     🚀 Grok Video Generation Automation - Starting Session
+[23:37:18] INFO        Image    : None
+[23:37:18] INFO     =======================================================
+[23:37:18] INFO     STAGE 1: Launching Chrome
+[23:37:18] INFO     ✅ STAGE 1 PASSED: Chrome launched.
+[23:37:18] INFO     STAGE 2: Navigating to Grok
+[23:37:20] INFO     ⏳ Waiting 8.0s for UI to settle …
