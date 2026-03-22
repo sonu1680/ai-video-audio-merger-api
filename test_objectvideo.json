@@ -1,0 +1,15 @@
+{
+  "stories": [
+    {
+      "id": 1,
+      "title": "Test video",
+      "modules": [
+        {
+          "module_number": 1,
+          "image_generation_prompt": "apple on desk",
+          "video_generation_prompt": "apple rotating"
+        }
+      ]
+    }
+  ]
+}

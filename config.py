@@ -16,7 +16,7 @@ R2_ACCOUNT_ID = "6613a5931848e80d555ccf73b6e553e0"
 R2_BUCKET_NAME = "ai-videos"
 
 # Webhook Config
-N8N_WEBHOOK_URL = "https://n8n.sonupandit.in/webhook/f399fe7e-c65b-4dd1-b848-0f4d50b569d4"
+N8N_WEBHOOK_URL = "https://n8n.sonupandit.in/webhook-test/f399fe7e-c65b-4dd1-b848-0f4d50b569d4"
 VIDEO_PUBLIC_DOMAIN = "https://cdn.sonupandit.in"
 
 

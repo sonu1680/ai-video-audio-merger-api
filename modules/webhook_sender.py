@@ -35,7 +35,7 @@ def create_retrying_session() -> requests.Session:
     session.mount('https://', adapter)
     return session
 
-def send_n8n_webhook(story_id: str, bucket_filename: str, timestamp_str: str, title: str = None, description: str = None, tags: str = None, source_video_path: str = None) -> bool:
+def send_n8n_webhook(story_id: str, bucket_filename: str, timestamp_str: str, title: str = None, description: str = None, tags: str = None, source_video_path: str = None, video_type: str = "storyvideo") -> bool:
     """Sends a successful video generation payload to the n8n webhook."""
     try:
         public_video_url = f"{VIDEO_PUBLIC_DOMAIN}/{bucket_filename}"
@@ -47,7 +47,8 @@ def send_n8n_webhook(story_id: str, bucket_filename: str, timestamp_str: str, ti
             "timestamp": timestamp_str,
             "title": title,
             "description": description,
-            "tags": tags
+            "tags": tags,
+            "video_type": video_type
         }
         
         log.info(f"[story_id: {story_id}] 📡 Sending JSON webhook to {N8N_WEBHOOK_URL}")

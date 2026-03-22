@@ -209,7 +209,8 @@ async def _process_payload_sequentially(payload: Union[TestPayload, List[StoryPa
                             title=story.title,
                             description=story.description,
                             tags=story.tags,
-                            source_video_path=str(final_video_path.absolute())
+                            source_video_path=str(final_video_path.absolute()),
+                            video_type="storyvideo"
                         )
                     
                     webhook_success = await loop.run_in_executor(None, _run_webhook_task)
@@ -219,9 +220,9 @@ async def _process_payload_sequentially(payload: Union[TestPayload, List[StoryPa
                         log.info(f"[story_id: {current_story_id}] 🧹 Webhook successful. Cleaning up videos directory...")
                         if VIDEOS_DIR.exists():
                             try:
-                                shutil.rmtree(VIDEOS_DIR)
+                                send2trash(str(VIDEOS_DIR.absolute()))
                                 VIDEOS_DIR.mkdir(exist_ok=True)
-                                log.info(f"[story_id: {current_story_id}] ✅ Videos folder completely deleted and recreated.")
+                                log.info(f"[story_id: {current_story_id}] ✅ Videos folder sent to trash and recreated.")
                             except Exception as cleanup_err:
                                 log.error(f"[story_id: {current_story_id}] ❌ Failed to clean videos folder: {cleanup_err}")
                     
@@ -286,6 +287,98 @@ async def process_test_payload(payload: Union[TestPayload, List[StoryPayload]], 
     """
     background_tasks.add_task(_process_payload_sequentially, payload)
     return JSONResponse({"status": "processing", "message": "Payload processing started in the background."})
+
+
+@app.post(
+    "/api/objectvideo",
+    summary="Generate an object video purely from text prompts",
+)
+async def api_objectvideo(payload: Union[TestPayload, List[StoryPayload]], background_tasks: BackgroundTasks):
+    """
+    Acts like process_payload but uses a simplified pipeline:
+    For each module, the image_generation_prompt and video_generation_prompt 
+    are combined into a single text prompt and sent directly to Grok's video mode.
+    No image frames are extracted or uploaded between modules.
+    """
+    stories = payload.stories if isinstance(payload, TestPayload) else payload
+    background_tasks.add_task(_run_objectvideo_pipeline, stories)
+    return JSONResponse(
+        status_code=202,
+        content={"status": "processing", "message": "Object video generation started in the background."}
+    )
+
+
+async def _run_objectvideo_pipeline(stories: list) -> None:
+    """
+    Background worker for /api/objectvideo.
+    Generates isolated videos, merges them, uploads to R2, and fires webhook.
+    """
+    import datetime
+    from modules.object_video_processor import generate_object_modules_sequentially
+    from modules.video_merger import merge_videos
+    from modules.video_uploader import upload_video_to_r2
+    from modules.webhook_sender import send_n8n_webhook
+
+    for story in stories:
+        current_story_id = str(story.story_id if story.story_id is not None else story.id)
+        modules = sorted(story.modules, key=lambda m: m.module_number)
+        
+        async with _chrome_lock:
+            loop = asyncio.get_event_loop()
+            try:
+                # 1. Generate independent videos from combined prompts
+                def _run_gen():
+                    module_dicts = [m.dict() for m in modules]
+                    return generate_object_modules_sequentially(current_story_id, module_dicts)
+                
+                generated_video_paths = await loop.run_in_executor(None, _run_gen)
+
+                if not generated_video_paths:
+                    log.warning(f"[story_id: {current_story_id}] ⚠️ No videos generated for objectvideo.")
+                    continue
+
+                # 2. Merge 
+                def _run_merge():
+                    return merge_videos(current_story_id, generated_video_paths, None)
+
+                final_video_path = await loop.run_in_executor(None, _run_merge)
+
+                # 3. Upload to R2
+                timestamp_str = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+                bucket_filename = f"videos/obj_video_{timestamp_str}.mp4"
+
+                def _run_upload():
+                    return upload_video_to_r2(str(final_video_path.absolute()), bucket_filename)
+
+                upload_success = await loop.run_in_executor(None, _run_upload)
+
+                # 4. Webhook and Cleanup
+                if upload_success:
+                    from config import VIDEO_PUBLIC_DOMAIN, VIDEOS_DIR
+                    send_n8n_webhook(
+                        str(current_story_id), 
+                        bucket_filename, 
+                        timestamp_str, 
+                        title=story.title,
+                        description=story.description,
+                        tags=story.tags,
+                        video_type="objectvideo"
+                    )
+                    
+                    # Cleanup videos folder
+                    import shutil
+                    try:
+                        send2trash(str(VIDEOS_DIR.absolute()))
+                        VIDEOS_DIR.mkdir(exist_ok=True)
+                        log.info(f"[story_id: {current_story_id}] 🧹 Sent videos directory to trash and recreated.")
+                    except Exception as e:
+                        log.warning(f"[story_id: {current_story_id}] ⚠️ Failed to clean up videos directory: {e}")
+                else:
+                    log.error(f"[story_id: {current_story_id}] ❌ Failed to upload obj video.")
+
+            except Exception as e:
+                log.error(f"[story_id: {current_story_id}] ❌ Pipeline failed: {e}")
+
 
 
 async def _handle_generation(prompt: str, background_tasks: BackgroundTasks) -> FileResponse:

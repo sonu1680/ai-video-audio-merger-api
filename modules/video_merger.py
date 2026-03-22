@@ -37,7 +37,8 @@ def merge_videos(story_id: str, video_paths: List[Path], voiceover_path: Path = 
         cmd = [
             "ffmpeg", "-y", "-f", "concat", "-safe", "0", 
             "-i", str(concat_file.absolute()), 
-            "-c", "copy", str(base_merged_output.absolute())
+            "-vf", "crop=iw:ih-50:0:0", "-c:a", "copy",
+            str(base_merged_output.absolute())
         ]
         
         process = subprocess.run(cmd, capture_output=True, text=True)
@@ -68,7 +69,7 @@ def merge_videos(story_id: str, video_paths: List[Path], voiceover_path: Path = 
                 audio_cmd.extend(["-stream_loop", "-1", "-i", str(bg_audio_path.absolute())])
                 bg_idx = inputs_count
                 inputs_count += 1
-                filter_complex.append(f"[{bg_idx}:a]volume=0.3[a_bg];")
+                filter_complex.append(f"[{bg_idx}:a]volume=0.2[a_bg];")
                 
             # Build the amix string explicitly depending on presence
             amix_inputs = "[0:a]" # Base video audio
